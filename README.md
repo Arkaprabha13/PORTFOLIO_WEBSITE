@@ -3,7 +3,7 @@
 
 
 
-[🔗 Live Demo]([https://arkaprabha-portfolio.vercel.app](https://portfolio-website-iota-ten-15.vercel.app/)) -  [📧 Contact](mailto:arkaofficial13@gmail.com) -  [💼 LinkedIn](https://linkedin.com/in/arkaprabhabanerjee13)
+[🔗 Live Demo](https://portfolio-website-iota-ten-15.vercel.app/) -  [📧 Contact](mailto:arkaofficial13@gmail.com) -  [💼 LinkedIn](https://linkedin.com/in/arkaprabhabanerjee13)
 
 
 
