@@ -1,184 +1,293 @@
-# Welcome to your Lovable project
+# 🚀 Arkaprabha's AI Portfolio Showcase
 
-## Project info
 
-**URL**: https://lovable.dev/projects/ffcc59f8-765d-461a-befe-1d1b68fb083d
 
-## How can I edit this code?
+![Portfolio Banner](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=300&fit=crop&crop=centershields.io/badge/React-18.0+-61DAFB?style=for-the-badge&logoimg.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white/img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor, interactive portfolio showcasing AI/ML engineering expertise**
 
-There are several ways of editing your application.
+[🔗 Live Demo](https://arkaprabha-portfolio.vercel.app) -  [📧 Contact](mailto:arkaofficial13@gmail.com) -  [💼 LinkedIn](https://linkedin.com/in/arkaprabhabanerjee13)
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ffcc59f8-765d-461a-befe-1d1b68fb083d) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📋 Table of Contents
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/ffcc59f8-765d-461a-befe-1d1b68fb083d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
-# Arkaprabha Banerjee - AI & Full-Stack Portfolio
-
-Welcome to the portfolio of **Arkaprabha Banerjee**, a Senior Machine Learning and Full-Stack Engineer specializing in AI solutions, LangChain, FAISS, and cutting-edge ML technologies.
-
-## 🚀 Overview
-
-This portfolio showcases my expertise in building intelligent systems, full-stack applications, and advanced machine learning solutions. Explore my projects, blog, and contact information.
+- [✨ Features](#-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [🚀 Quick Start](#-quick-start)
+- [📁 Project Structure](#-project-structure)
+- [🎨 Key Components](#-key-components)
+- [🔧 Configuration](#-configuration)
+- [📱 Responsive Design](#-responsive-design)
+- [⚡ Performance](#-performance)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [👨‍💻 About Me](#-about-me)
 
 ## ✨ Features
 
-- **Modern UI**: Built with React, Tailwind CSS, and shadcn/ui for a sleek, responsive experience.
-- **AI & ML Projects**: Showcases real-world applications in NLP, Computer Vision, and more.
-- **Interactive Effects**: Includes custom animations and effects for engaging presentation.
-- **Blog**: Insights and articles on AI, ML, and software engineering.
-- **Contact**: Easy-to-use contact form for collaboration and inquiries.
+### 🎭 **Interactive Animations**
+- **Vortex Background**: Dynamic particle system with mouse interaction
+- **Scrambled Text Effects**: GSAP-powered text animations with hover effects
+- **Micro-interactions**: Magnetic buttons, 3D transforms, and smooth transitions
+- **Framer Motion**: 60fps animations with spring physics
+
+### 🧠 **AI/ML Project Showcase**
+- **Krishak AI Platform**: Agricultural disease detection (99.35% accuracy)
+- **AutoML SaaS**: No-code machine learning pipeline
+- **RAG Multi-Agent System**: Advanced retrieval-augmented generation
+- **Computer Vision Pipeline**: YOLOv5 object detection with MLOps
+
+### 💼 **Professional Sections**
+- **Hero Landing**: Interactive avatar with scrambled name animation
+- **About Page**: Timeline, skills visualization, and testimonials
+- **Projects Gallery**: Filterable portfolio with detailed modals
+- **Contact Form**: Real-time validation with progress tracking
+- **Blog Section**: Technical articles and insights
+
+### 🎨 **Modern UI/UX**
+- **Dark/Light Mode**: System preference detection with manual toggle
+- **Glass Morphism**: Frosted glass effects and backdrop blur
+- **Responsive Grid**: Mobile-first design with Tailwind CSS
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Framer Motion
-- **3D & Effects**: Three.js, @react-three/fiber, GSAP
-- **State & Forms**: React Hook Form, Zod, TanStack Query
-- **Routing**: React Router DOM
-- **Other**: Radix UI, Lucide Icons, Sonner, and more
-
-## 📦 Project Structure
-
-```
-arkas-ai-portfolio-showcase/
-├── public/           # Static assets (favicon, resume, images)
-├── src/              # Source code (components, pages, hooks, lib)
-├── tailwind.config.ts
-├── vite.config.ts
-├── package.json
-└── README.md
+### **Frontend Framework**
+```json
+{
+  "react": "^18.2.0",
+  "typescript": "^5.0.0",
+  "vite": "^4.4.0"
+}
 ```
 
-## 🖥️ Getting Started
+### **Styling & Animation**
+```json
+{
+  "tailwindcss": "^3.3.0",
+  "framer-motion": "^10.16.0",
+  "gsap": "^3.12.0",
+  "lucide-react": "^0.263.0"
+}
+```
 
-### Prerequisites
+### **Build Tools**
+```json
+{
+  "vite": "^4.4.0",
+  "@vitejs/plugin-react-swc": "^3.3.0",
+  "autoprefixer": "^10.4.0"
+}
+```
 
-- [Node.js](https://nodejs.org/) (v18+ recommended)
-- [pnpm](https://pnpm.io/) or [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+## 🚀 Quick Start
 
-### Installation
+### **Prerequisites**
+- Node.js 18+ and npm/yarn
+- Git for version control
+
+### **Installation**
 
 ```bash
 # Clone the repository
-git clone https://github.com/arkaprabha/arkas-ai-portfolio-showcase.git
+git clone https://github.com/Arkaprabha13/arkas-ai-portfolio-showcase.git
+
+# Navigate to project directory
 cd arkas-ai-portfolio-showcase
 
 # Install dependencies
-pnpm install
-# or
 npm install
-# or
-yarn install
-```
 
-### Development
-
-```bash
-pnpm dev
-# or
+# Start development server
 npm run dev
-# or
-yarn dev
-```
 
-Visit [http://localhost:5173](http://localhost:5173) to view the site.
-
-### Build for Production
-
-```bash
-pnpm build
-# or
+# Build for production
 npm run build
-# or
-yarn build
-```
 
-### Preview Production Build
-
-```bash
-pnpm preview
-# or
+# Preview production build
 npm run preview
-# or
-yarn preview
 ```
 
-## 📝 Customization
+### **Environment Setup**
 
-- Update your personal info, projects, and blog posts in the `src/pages` and `src/components` directories.
-- Replace images and assets in the `public/` folder.
-- Adjust theme and styles via `tailwind.config.ts`.
+Create a `.env.local` file:
+```env
+VITE_APP_TITLE="Arkaprabha's Portfolio"
+VITE_CONTACT_EMAIL="arkaofficial13@gmail.com"
+VITE_GITHUB_URL="https://github.com/Arkaprabha13"
+VITE_LINKEDIN_URL="https://linkedin.com/in/arkaprabhabanerjee13"
+```
+
+## 📁 Project Structure
+
+```
+arkas-ai-portfolio-showcase/
+├── 📂 public/
+│   ├── 🖼️ images/
+│   ├── 📄 Arkaprabha_Banerjee_resume.pdf
+│   └── 🌐 favicon.ico
+├── 📂 src/
+│   ├── 📂 components/
+│   │   ├── 📂 ui/
+│   │   │   ├── 🧩 card.tsx
+│   │   │   ├── 🔘 button.tsx
+│   │   │   └── 🧭 resizable-navbar.tsx
+│   │   └── 📂 effects/
+│   │       ├── ✨ ScrambledText.tsx
+│   │       └── 🌪️ Vortex.tsx
+│   ├── 📂 pages/
+│   │   ├── 🏠 Index.tsx
+│   │   ├── 👤 About.tsx
+│   │   ├── 💼 Projects.tsx
+│   │   ├── 📝 Blog.tsx
+│   │   └── 📧 Contact.tsx
+│   ├── 📂 styles/
+│   │   └── 🎨 globals.css
+│   ├── 🚀 main.tsx
+│   └── 📱 App.tsx
+├── ⚙️ tailwind.config.js
+├── 📦 package.json
+└── 📖 README.md
+```
+
+## 🎨 Key Components
+
+### **🌪️ Vortex Background**
+```tsx
+
+```
+
+### **✨ Scrambled Text Animation**
+```tsx
+
+  Arkaprabha Banerjee
+
+```
+
+### **🎭 Magnetic Button**
+```tsx
+
+  Get In Touch
+
+```
+
+## 🔧 Configuration
+
+### **Tailwind CSS Setup**
+```js
+// tailwind.config.js
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      animation: {
+        'gradient-x': 'gradient-x 15s ease infinite',
+        'float': 'float 6s ease-in-out infinite',
+      }
+    }
+  }
+}
+```
+
+### **Vite Configuration**
+```js
+// vite.config.ts
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+})
+```
+
+## 📱 Responsive Design
+
+### **Breakpoint Strategy**
+- **Mobile**: 320px - 768px
+- **Tablet**: 768px - 1024px  
+- **Desktop**: 1024px+
+
+### **Key Features**
+- ✅ Mobile-first approach
+- ✅ Touch-friendly interactions
+- ✅ Optimized images and assets
+- ✅ Progressive enhancement
+
+## ⚡ Performance
+
+### **Optimization Techniques**
+- **Code Splitting**: Route-based lazy loading
+- **Image Optimization**: WebP format with fallbacks
+- **Bundle Analysis**: Tree-shaking and dead code elimination
+- **Caching Strategy**: Service worker for offline support
+
+### **Performance Metrics**
+```
+Lighthouse Score:
+🟢 Performance: 95+
+🟢 Accessibility: 100
+🟢 Best Practices: 100
+🟢 SEO: 100
+```
+
+## 🤝 Contributing
+
+### **Development Workflow**
+
+1. **Fork the repository**
+2. **Create feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit changes**: `git commit -m 'Add amazing feature'`
+4. **Push to branch**: `git push origin feature/amazing-feature`
+5. **Open Pull Request**
+
+### **Code Standards**
+- TypeScript for type safety
+- ESLint + Prettier for code formatting
+- Conventional commits for clear history
+- Component-driven development
+
+### **Testing**
+```bash
+# Run type checking
+npm run type-check
+
+# Run linting
+npm run lint
+
+# Run tests
+npm run test
+```
 
 ## 📄 License
 
-This portfolio is open source and available under the [MIT License](LICENSE).
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-## 🙋‍♂️ Contact
+```
+MIT License
 
-- **Website**: [arkaprabha.dev](https://arkaprabha.dev)
-- **GitHub**: [@arkaprabha](https://github.com/arkaprabha)
-- **LinkedIn**: [in/arkaprabha](https://linkedin.com/in/arkaprabha)
-- **Kaggle**: [arkaprabha](https://kaggle.com/arkaprabha)
+Copyright (c) 2025 Arkaprabha Banerjee
 
----
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
 
-> Built with passion for AI, ML, and software engineering.
+## 👨‍💻 About Me
+
+
+
+### **Arkaprabha Banerjee**
+*Full-Stack ML Engineer*
+
+🎓 **B.Tech CSE** at Heritage Institute of Technology  
+🚀 **Specializing in**: AI/ML, RAG Systems, Computer Vision  
+🏆 **Achievements**: 25+ projects  
+
+**Let's Connect:**
+[![Email](https://img.shields.io/badge/Email-arkaofficial13@gmail.com-red?style=flat-square&logo=shields.io/badge/GitHub-Arkaprabha13-black?style=flatenter">
+
+**⭐ Star this repository if you found it helpful!**
+
+*Built with ❤️ in India*
