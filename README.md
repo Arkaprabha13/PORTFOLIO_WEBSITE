@@ -2,9 +2,8 @@
 
 
 
-![Portfolio Banner](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=300&fit=crop&crop=centershields.io/badge/React-18.0+-61DAFB?style=for-the-badge&logoimg.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white/img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor, interactive portfolio showcasing AI/ML engineering expertise**
 
-[🔗 Live Demo](https://arkaprabha-portfolio.vercel.app) -  [📧 Contact](mailto:arkaofficial13@gmail.com) -  [💼 LinkedIn](https://linkedin.com/in/arkaprabhabanerjee13)
+[🔗 Live Demo]([https://arkaprabha-portfolio.vercel.app](https://portfolio-website-iota-ten-15.vercel.app/)) -  [📧 Contact](mailto:arkaofficial13@gmail.com) -  [💼 LinkedIn](https://linkedin.com/in/arkaprabhabanerjee13)
 
 
 
