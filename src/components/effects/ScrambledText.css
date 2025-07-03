@@ -1,0 +1,30 @@
+
+.text-block {
+  margin: 2rem 0;
+  max-width: 800px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(14px, 4vw, 32px);
+  color: #f8fafc;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+  transition: all 0.3s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block;
+  
+}
+.text-block p {
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin: 0;
+}
+.char:hover {
+  color: #eaeaeb;
+}
+
+
