@@ -83,7 +83,7 @@ const Index = () => {
   // Stats data
   const stats = [
     { label: 'GitHub Commits', value: '2,847', icon: Github, color: 'from-gray-600 to-gray-800' },
-    { label: 'LeetCode Solved', value: '360', icon: Code, color: 'from-orange-500 to-red-600' },
+    { label: 'LeetCode Solved', value: '360+', icon: Code, color: 'from-orange-500 to-red-600' },
     { label: 'Kaggle Rank', value: '#1,247', icon: Trophy, color: 'from-blue-500 to-purple-600' },
     { label: 'GFG Problems Solved', value: '600+', icon: LightBulbIcon, color: 'from-green-500 to-teal-600' }
   ];
