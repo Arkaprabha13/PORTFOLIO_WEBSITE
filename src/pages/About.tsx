@@ -280,7 +280,31 @@ const About = () => {
       value: '400+', 
       details: 'Guided in programming and career development',
       color: 'from-teal-400 to-green-500'
-    }
+    },
+      { 
+    icon: '🎓', 
+    label: 'CGPA', 
+    value: '9.1/10', 
+    details: 'B.Tech Data Science specialization',
+    color: 'from-purple-400 to-pink-500'
+  },
+    { 
+  icon: '⏱️', 
+  label: 'Development Time', 
+  value: '80% Faster', 
+  details: 'AutoML platform reduces model creation time',
+  color: 'from-cyan-400 to-blue-500'
+},
+    { 
+  icon: '⚡', 
+  label: 'API Response Time', 
+  value: '<400ms', 
+  details: 'Optimized backend performance',
+  color: 'from-yellow-400 to-orange-500'
+}
+
+
+
 
   ];
 
