@@ -248,17 +248,18 @@ const About = () => {
     { 
       icon: '🏆', 
       label: 'LeetCode Problems', 
-      value: '324+', 
+      value: '360+', 
       details: 'Solved across Easy, Medium, and Hard difficulties',
       color: 'from-yellow-400 to-orange-500'
     },
     { 
-      icon: '⭐', 
-      label: 'GitHub Stars', 
-      value: '150+', 
-      details: 'Across multiple open-source repositories',
-      color: 'from-purple-400 to-pink-500'
-    },
+    icon: '📚', 
+    label: 'Technologies', 
+    value: '20+', 
+    details: 'Programming languages and frameworks',
+    color: 'from-indigo-400 to-purple-500'
+    }
+    ,
     { 
       icon: '🚀', 
       label: 'Projects Built', 
@@ -269,10 +270,18 @@ const About = () => {
     { 
       icon: '📚', 
       label: 'Years Learning', 
-      value: '6+', 
+      value: '3+', 
       details: 'Continuous learning and skill development',
       color: 'from-green-400 to-teal-500'
+    },
+    { 
+      icon: '👥', 
+      label: 'Students Mentored', 
+      value: '400+', 
+      details: 'Guided in programming and career development',
+      color: 'from-teal-400 to-green-500'
     }
+
   ];
 
   const containerVariants = {
