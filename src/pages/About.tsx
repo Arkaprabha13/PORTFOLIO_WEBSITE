@@ -192,15 +192,57 @@ const About = () => {
   ];
 
   const skills = [
-    { name: 'Python', level: 95, color: '#3776ab', description: 'Advanced scripting, ML libraries, automation' },
-    { name: 'React/Next.js', level: 90, color: '#61dafb', description: 'Modern web apps, SSR, performance optimization' },
-    { name: 'Django/FastAPI', level: 88, color: '#092e20', description: 'REST APIs, microservices, scalable backends' },
-    { name: 'LangChain', level: 85, color: '#1c3d5c', description: 'RAG systems, multi-agent architectures' },
-    { name: 'Machine Learning', level: 92, color: '#ff6f00', description: 'Deep learning, computer vision, NLP' },
-    { name: 'FAISS/Vector DBs', level: 80, color: '#4285f4', description: 'Similarity search, embeddings, retrieval' },
-    { name: 'Docker/K8s', level: 75, color: '#2496ed', description: 'Containerization, orchestration, DevOps' },
-    { name: 'Supabase', level: 85, color: '#3ecf8e', description: 'Real-time databases, authentication, storage' }
-  ];
+  // Programming Languages & Core Tech
+  { name: 'Python', level: 95, color: '#3776ab', description: 'Advanced scripting, ML/AI, automation, data pipelines' },
+  { name: 'JavaScript/TypeScript', level: 90, color: '#f7df1e', description: 'Modern web apps, async patterns, scalable codebases' },
+  { name: 'C++ / C#', level: 70, color: '#178600', description: 'System-level programming, backend APIs, performance-critical modules' },
+  { name: 'SQL & NoSQL', level: 88, color: '#00618a', description: 'Relational (PostgreSQL, MySQL), document (MongoDB), and vector DBs (FAISS, Qdrant)' },
+
+  // Web & Frontend
+  { name: 'React / Next.js', level: 90, color: '#61dafb', description: 'Till Required for Backend Integration' },
+  { name: 'HTML5 & CSS3', level: 85, color: '#e44d26', description: 'Responsive design, accessibility, modern layouts' },
+  { name: 'Tailwind CSS', level: 80, color: '#38bdf8', description: 'Utility-first styling, rapid prototyping, dark mode' },
+
+  // Backend & APIs
+  { name: 'Django (MVT)', level: 88, color: '#092e20', description: 'Robust REST APIs, admin panels, ORM, authentication' },
+  { name: 'Django REST Framework', level: 85, color: '#3b2e2c', description: 'Versioned APIs, serialization, permissions, throttling' },
+  { name: 'FastAPI', level: 90, color: '#009688', description: 'Async microservices, OpenAPI docs, blazing-fast endpoints' },
+  { name: 'Flask', level: 80, color: '#000000', description: 'Lightweight APIs, webhooks, internal tooling' },
+  { name: '.NET MVC', level: 75, color: '#512bd4', description: 'Enterprise portals, strong typing, LINQ, scalable architecture' },
+  { name: 'Supabase', level: 85, color: '#3ecf8e', description: 'Realtime DB, auth, storage, Postgres at scale' },
+
+  // AI/ML & Data
+  { name: 'Machine Learning', level: 92, color: '#ff6f00', description: 'Deep learning, computer vision, NLP, model deployment' },
+  { name: 'LangChain', level: 85, color: '#1c3d5c', description: 'RAG systems, multi-agent architectures, LLM pipelines' },
+  { name: 'FAISS / Qdrant', level: 90, color: '#4285f4', description: 'Vector search, embeddings, retrieval-augmented generation' },
+  { name: 'YOLOv5 / OpenCV', level: 88, color: '#f44336', description: 'Object detection, real-time CV, custom training' },
+  { name: 'Streamlit', level: 90, color: '#ff4b4b', description: 'Interactive dashboards, rapid ML prototyping' },
+
+  // DevOps & Cloud
+  // { name: 'Docker', level: 65, color: '#2496ed', description: 'Containerization, reproducible environments, local & prod' },
+  // { name: 'Kubernetes', level: 50, color: '#326ce5', description: 'Orchestration, scaling, blue-green deployments' },
+  // { name: 'GitHub Actions', level: 60, color: '#24292f', description: 'CI/CD, test automation, code quality gates' },
+  // { name: 'AWS (Basics)', level: 45, color: '#ff9900', description: 'EC2, S3, Lambda, deployment pipelines' },
+
+  // Data Structures & Algorithms
+  { name: 'DSA / Problem Solving', level: 90, color: '#00bcd4', description: '500+ LeetCode/GFG, graph theory, DP, optimization' },
+
+  // Testing & Quality
+  { name: 'Unit / Integration Testing', level: 80, color: '#4caf50', description: 'Pytest, Jest, test-driven development, CI pipelines' },
+  { name: 'Debugging & Profiling', level: 85, color: '#607d8b', description: 'Performance tuning, bug fixing, root cause analysis' },
+
+  // Tools & Workflow
+  { name: 'Git & Version Control', level: 90, color: '#f34f29', description: 'Branching, PRs, code reviews, collaboration' },
+  { name: 'IDEs & Editors', level: 85, color: '#007acc', description: 'VSCode, PyCharm, productivity tooling' },
+
+  // Soft Skills (critical for modern devs)
+  { name: 'Communication', level: 90, color: '#2196f3', description: 'Technical writing, documentation, stakeholder updates' },
+  { name: 'Teamwork & Mentoring', level: 88, color: '#8bc34a', description: 'Peer reviews, onboarding, knowledge sharing' },
+  { name: 'Problem Solving', level: 92, color: '#ff9800', description: 'Analytical thinking, creative solutions, debugging' },
+  { name: 'Adaptability', level: 85, color: '#9c27b0', description: 'Learning new tech, thriving in changing environments' },
+  { name: 'Time Management', level: 85, color: '#607d8b', description: 'Meeting deadlines, task prioritization, agile workflows' }
+];
+
 
   const funFacts = [
     { 
