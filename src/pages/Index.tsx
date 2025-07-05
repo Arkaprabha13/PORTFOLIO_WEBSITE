@@ -439,7 +439,7 @@ const projects = [
                 handle="arkaprabha13"
                 status="Online"
                 contactText="Contact Me"
-                avatarUrl="https://media.licdn.com/dms/image/v2/D5603AQEEQwtxyY6zNg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1726458926371?e=2147483647&v=beta&t=rayWkb2J4QJ_B5gRwOKHYa06BlL3K052u-R-ag_o-ss"
+                avatarUrl="https://media.licdn.com/dms/image/v2/D5603AQFYCP1Vw7h8fw/profile-displayphoto-crop_800_800/B56ZfUnQrFGoAI-/0/1751618751685?e=1756944000&v=beta&t=1xsis1104JV70E2fb0bZIfv6AHcMsKs6iMDHqzhkBvI"
                 showUserInfo={true}
                 enableTilt={true}
                 onContactClick={() => window.open('mailto:arkaofficial13@gmail.com')}
