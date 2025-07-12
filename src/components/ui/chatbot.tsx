@@ -146,71 +146,73 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimi
   }, [isOpen, messages.length]);
 
   // Enhanced message sending with better error handling
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  // Enhanced message sending with corrected API calls
+const sendMessage = async () => {
+  if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = {
-      role: 'user',
-      content: input,
+  const userMessage: Message = {
+    role: 'user',
+    content: input,
+    timestamp: new Date().toISOString()
+  };
+
+  setMessages(prev => [...prev, userMessage]);
+  setInput('');
+  setIsLoading(true);
+  setIsTyping(true);
+  setError(null);
+
+  try {
+    // Health check first
+    const isHealthy = await chatService.checkHealth();
+    if (!isHealthy) {
+      throw new Error('API service is not available');
+    }
+
+    // Send message to API with correct field names
+    const data = await chatService.sendMessage(input, messages);
+    
+    setIsTyping(false);
+    
+    const assistantMessage: Message = {
+      role: 'assistant',
+      content: data.response,        // ✅ Fixed: using 'response' instead of 'answer'
+      timestamp: data.timestamp
+    };
+
+    setMessages(prev => [...prev, assistantMessage]);
+  } catch (error: any) {
+    setIsTyping(false);
+    console.error('Error sending message:', error);
+    
+    // Enhanced error handling
+    let errorContent = "I apologize, but I'm having trouble connecting right now. ";
+    
+    if (error.message?.includes('404')) {
+      errorContent += "The API endpoint was not found. ";
+    } else if (error.message?.includes('422')) {
+      errorContent += "There's a data format issue. ";
+    } else if (error.message?.includes('500')) {
+      errorContent += "The AI service is temporarily unavailable. ";
+    } else if (error.message?.includes('API service is not available')) {
+      errorContent += "The backend service is currently offline. ";
+    } else if (error.message?.includes('Failed to fetch')) {
+      errorContent += "Network connection failed. ";
+    }
+    
+    errorContent += "Please try again later or contact **Arkaprabha directly** at arkaofficial13@gmail.com";
+    
+    const errorMessage: Message = {
+      role: 'assistant',
+      content: errorContent,
       timestamp: new Date().toISOString()
     };
 
-    // Add user message and clear input
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-    setIsTyping(true);
-    setError(null);
-
-    try {
-      // Health check first
-      const isHealthy = await chatService.checkHealth();
-      if (!isHealthy) {
-        throw new Error('API service is not available');
-      }
-
-      // Send message to API
-      const data = await chatService.sendMessage(input, messages);
-      
-      setIsTyping(false);
-      
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.answer,
-        timestamp: data.timestamp
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error: any) {
-      setIsTyping(false);
-      console.error('Error sending message:', error);
-      
-      // Determine error message based on error type
-      let errorContent = "I apologize, but I'm having trouble connecting right now. ";
-      
-      if (error.message?.includes('CORS')) {
-        errorContent += "There's a connection issue with the server. ";
-      } else if (error.message?.includes('500')) {
-        errorContent += "The AI service is temporarily unavailable. ";
-      } else if (error.message?.includes('API service is not available')) {
-        errorContent += "The backend service is currently offline. ";
-      } else if (error.message?.includes('Failed to fetch')) {
-        errorContent += "Network connection failed. ";
-      }
-      
-      errorContent += "Please try again later or contact **Arkaprabha directly** at arkaofficial13@gmail.com";
-      
-      const errorMessage: Message = {
-        role: 'assistant',
-        content: errorContent,
-        timestamp: new Date().toISOString()
-      };
-
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    setMessages(prev => [...prev, errorMessage]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   // Handle keyboard shortcuts
   const handleKeyPress = (e: React.KeyboardEvent) => {
