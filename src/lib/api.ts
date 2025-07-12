@@ -1,6 +1,6 @@
 // lib/api.ts
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+  BASE_URL: import.meta.env.VITE_API_URL || 'https://portfolio-chatbot-8isd.onrender.com',
   ENDPOINTS: {
     CHAT: '/api/chat',
     HEALTH: '/api/health'
@@ -8,7 +8,7 @@ export const API_CONFIG = {
 };
 
 export const chatService = {
-  async sendMessage(prompt: string, history: Array<{role: string, content: string}> = []) {
+  async sendMessage(message: string, history: Array<{role: string, content: string}> = []) {
     try {
       const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CHAT}`, {
         method: 'POST',
@@ -16,10 +16,10 @@ export const chatService = {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        mode: 'cors', // Explicitly set CORS mode
-        credentials: 'omit', // Don't send credentials for now
+        mode: 'cors',
+        credentials: 'omit',
         body: JSON.stringify({
-          prompt,
+          message,      // ✅ Fixed: changed from 'prompt' to 'message'
           history
         }),
       });
@@ -29,7 +29,11 @@ export const chatService = {
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
-      return await response.json();
+      const data = await response.json();
+      return {
+        response: data.response,    // ✅ Fixed: changed from 'answer' to 'response'
+        timestamp: data.timestamp
+      };
     } catch (error) {
       console.error('Chat API error:', error);
       throw error;
