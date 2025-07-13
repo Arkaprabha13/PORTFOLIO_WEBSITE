@@ -75,13 +75,13 @@ const MessageContent: React.FC<{ message: Message }> = ({ message }) => {
     return <p className="text-sm whitespace-pre-wrap">{message.content}</p>;
   }
 
+  // ✅ Additional client-side filtering for any remaining <think> tags
+  const cleanContent = message.content.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+
   return (
     <div className="text-sm">
-      <ReactMarkdown
-        components={MarkdownComponents}
-        // className="prose prose-sm max-w-none dark:prose-invert"
-      >
-        {message.content}
+      <ReactMarkdown components={MarkdownComponents}>
+        {cleanContent}
       </ReactMarkdown>
     </div>
   );
@@ -145,74 +145,86 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimi
     }
   }, [isOpen, messages.length]);
 
-  // Enhanced message sending with better error handling
-  // Enhanced message sending with corrected API calls
-const sendMessage = async () => {
-  if (!input.trim() || isLoading) return;
+  // ✅ Fixed sendMessage function with proper variable scoping and retry logic
+  const sendMessage = async (retryCount = 0) => {
+    if (!input.trim() || isLoading) return;
 
-  const userMessage: Message = {
-    role: 'user',
-    content: input,
-    timestamp: new Date().toISOString()
-  };
-
-  setMessages(prev => [...prev, userMessage]);
-  setInput('');
-  setIsLoading(true);
-  setIsTyping(true);
-  setError(null);
-
-  try {
-    // Health check first
-    const isHealthy = await chatService.checkHealth();
-    if (!isHealthy) {
-      throw new Error('API service is not available');
-    }
-
-    // Send message to API with correct field names
-    const data = await chatService.sendMessage(input, messages);
-    
-    setIsTyping(false);
-    
-    const assistantMessage: Message = {
-      role: 'assistant',
-      content: data.response,        // ✅ Fixed: using 'response' instead of 'answer'
-      timestamp: data.timestamp
-    };
-
-    setMessages(prev => [...prev, assistantMessage]);
-  } catch (error: any) {
-    setIsTyping(false);
-    console.error('Error sending message:', error);
-    
-    // Enhanced error handling
-    let errorContent = "I apologize, but I'm having trouble connecting right now. ";
-    
-    if (error.message?.includes('404')) {
-      errorContent += "The API endpoint was not found. ";
-    } else if (error.message?.includes('422')) {
-      errorContent += "There's a data format issue. ";
-    } else if (error.message?.includes('500')) {
-      errorContent += "The AI service is temporarily unavailable. ";
-    } else if (error.message?.includes('API service is not available')) {
-      errorContent += "The backend service is currently offline. ";
-    } else if (error.message?.includes('Failed to fetch')) {
-      errorContent += "Network connection failed. ";
-    }
-    
-    errorContent += "Please try again later or contact **Arkaprabha directly** at arkaofficial13@gmail.com";
-    
-    const errorMessage: Message = {
-      role: 'assistant',
-      content: errorContent,
+    const userMessage: Message = {
+      role: 'user',
+      content: input,
       timestamp: new Date().toISOString()
     };
 
-    setMessages(prev => [...prev, errorMessage]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+    // ✅ Capture the input value before clearing it
+    const currentInput = input;
+    
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+    setIsTyping(true);
+    setError(null);
+
+    try {
+      // ✅ Skip health check and try direct API call
+      const historyForApi = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
+      // ✅ Use the captured input value
+      const data = await chatService.sendMessage(currentInput, historyForApi);
+      
+      setIsTyping(false);
+      
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: data.response,
+        timestamp: data.timestamp
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
+      
+    } catch (error: any) {
+      setIsTyping(false);
+      console.error('Error sending message:', error);
+      
+      // ✅ Retry once on network errors
+      if (retryCount < 1 && (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError'))) {
+        console.log('Retrying message send...');
+        setTimeout(() => {
+          // Restore the input for retry
+          setInput(currentInput);
+          sendMessage(retryCount + 1);
+        }, 2000);
+        return;
+      }
+      
+      // Enhanced error handling with fallback
+      let errorContent = "I'm having trouble connecting right now. ";
+      
+      if (error.message?.includes('404')) {
+        errorContent += "The API endpoint was not found. ";
+      } else if (error.message?.includes('422')) {
+        errorContent += "There's a data format issue. ";
+      } else if (error.message?.includes('500')) {
+        errorContent += "The AI service is temporarily unavailable. ";
+      } else if (error.message?.includes('Failed to fetch')) {
+        errorContent += "Network connection failed. ";
+      }
+      
+      errorContent += "Please try again or contact **Arkaprabha directly** at arkaofficial13@gmail.com";
+      
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: errorContent,
+        timestamp: new Date().toISOString()
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Handle keyboard shortcuts
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -343,7 +355,7 @@ const sendMessage = async () => {
                     maxLength={500}
                   />
                   <Button
-                    onClick={sendMessage}
+                    onClick={() => sendMessage()}
                     disabled={isLoading || !input.trim()}
                     size="sm"
                     className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50"
