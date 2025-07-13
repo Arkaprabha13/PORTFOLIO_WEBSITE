@@ -7,11 +7,21 @@ export const API_CONFIG = {
   }
 };
 
+// Helper function to construct URLs properly
+const constructURL = (endpoint: string): string => {
+  const baseUrl = API_CONFIG.BASE_URL.replace(/\/+$/, ''); // Remove trailing slashes
+  const cleanEndpoint = endpoint.replace(/^\/+/, '/'); // Ensure single leading slash
+  return `${baseUrl}${cleanEndpoint}`;
+};
+
 export const chatService = {
   async sendMessage(message: string, history: Array<{role: string, content: string}> = []) {
     try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CHAT}`, {
-        method: 'POST',
+      const url = constructURL(API_CONFIG.ENDPOINTS.CHAT);
+      console.log('Making request to:', url); // Debug log
+      
+      const response = await fetch(url, {
+        method: 'POST', // ✅ Ensure POST method
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -29,12 +39,13 @@ export const chatService = {
 
       if (!response.ok) {
         const errorText = await response.text();
+        console.error('API Error:', response.status, errorText);
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
       
-      // ✅ Filter out <think> tags from the response
+      // Filter out <think> tags from the response
       const cleanResponse = data.response.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
       
       return {
@@ -49,11 +60,14 @@ export const chatService = {
 
   async checkHealth() {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      const url = constructURL(API_CONFIG.ENDPOINTS.HEALTH);
+      console.log('Health check URL:', url); // Debug log
       
-      const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.HEALTH}`, {
-        method: 'GET',
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      
+      const response = await fetch(url, {
+        method: 'GET', // ✅ Ensure GET method
         headers: {
           'Accept': 'application/json',
         },
