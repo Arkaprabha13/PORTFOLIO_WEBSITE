@@ -286,14 +286,18 @@ const projects = [
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
           >
            <span className=" text-gray-900 dark:text-white">Hi 👋 I'm </span>
-         <ScrambledText className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-800 bg-clip-text text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12  text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
-           radius={200}
-          duration={2.0}
-          delay={0.5}
-          scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-           >
-             Arkaprabha Banerjee
-        </ScrambledText>
+        <ScrambledText 
+            className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-800 bg-clip-text 
+                      text-sm md:text-lg lg:text-xl xl:text-2xl 
+                      text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12 
+                      font-bold tracking-tight"
+            radius={200}
+            duration={2.0}
+            delay={0.5}
+            scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+          >
+            Arkaprabha Banerjee
+          </ScrambledText>
 
           </motion.h1>
           <motion.p
