@@ -573,8 +573,8 @@ What would you like to know about Arkaprabha's work?`,
         initial={{ opacity: 0, scale: 0.8, y: 50 }}
         animate={{ 
           opacity: 1, 
-          scale: isMinimized ? 0.3 : 1, 
-          y: isMinimized ? 20 : 0 
+          scale: 1, // ✅ Always keep scale at 1
+          y: 0      // ✅ Remove y offset for minimized state
         }}
         exit={{ opacity: 0, scale: 0.8, y: 50 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
