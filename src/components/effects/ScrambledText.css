@@ -9,7 +9,7 @@
   visibility: visible !important;
 }
 
-/* .char {
+.char {
   will-change: transform;
   display: inline-block;
   transition: all 0.3s ease;
@@ -17,21 +17,8 @@
   visibility: visible !important;
   display: inline-block;
   
-} */
-/* ScrambledText.css */
-.char{
-  background:inherit;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
-   will-change: transform;
-  display: inline-block;
-  transition: all 0.3s ease;
-  opacity: 1 !important;
-  visibility: visible !important;
-   display: inline-block;
 }
+
 
 .text-block p {
   opacity: 1 !important;
