@@ -285,28 +285,10 @@ const projects = [
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
           >
-           <span className="text-gray-900 dark:text-white">Hi 👋 I'm </span>
-         <div className="flex flex-wrap justify-center items-center gap-4">
-            <ScrambledText
-              className="bg-gradient-to-r text-gray-900 dark:text-white from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block text-4xl md:text-6xl font-bold"
-              radius={150}
-              duration={1.5}
-              delay={0}
-              scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            >
-              Arkaprabha
-            </ScrambledText>
-            
-            <ScrambledText
-              className="bg-gradient-to-r text-gray-900 dark:text-white from-purple-600 to-pink-600 bg-clip-text text-transparent inline-block text-4xl md:text-6xl font-bold"
-              radius={150}
-              duration={1.5}
-              delay={0.3}
-              scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            >
-              Banerjee
-            </ScrambledText>
-          </div>
+           <span className=" text-gray-900 dark:text-white">Hi 👋 I'm </span>
+         <ScrambledText className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-800 bg-clip-text text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12  font-bold tracking-tight">
+             Arkaprabha Banerjee
+        </ScrambledText>
 
           </motion.h1>
           <motion.p
