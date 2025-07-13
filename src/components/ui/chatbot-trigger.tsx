@@ -19,12 +19,10 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
   const [showChatbot, setShowChatbot] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showInitialPopup, setShowInitialPopup] = useState(false);
-  const [hasShownInitialPopup, setHasShownInitialPopup] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Enhanced popup logic with user activity detection
   useEffect(() => {
@@ -33,20 +31,16 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
     const isReturningUser = lastVisit && (Date.now() - parseInt(lastVisit)) < 24 * 60 * 60 * 1000;
 
     if (!hasShown) {
-      // Shorter delay for returning users
       const delay = isReturningUser ? initialDelay / 2 : initialDelay;
       
       timerRef.current = setTimeout(() => {
-        // Only show popup if user is still active
         if (document.visibilityState === 'visible') {
           setShowInitialPopup(true);
-          setHasShownInitialPopup(true);
           sessionStorage.setItem('chatbotPopupShown', 'true');
         }
       }, delay);
     }
 
-    // Track user visit
     localStorage.setItem('lastPortfolioVisit', Date.now().toString());
 
     return () => {
@@ -61,12 +55,10 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
     if (!enableKeyboardShortcut) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl/Cmd + K to open chat
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         handleOpenChatbot();
       }
-      // Escape to close
       if (e.key === 'Escape' && showChatbot) {
         handleCloseChatbot();
       }
@@ -88,14 +80,13 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Enhanced handlers
+  // ✅ FIXED: Enhanced handlers with proper state management
   const handleAcceptChat = () => {
     setShowInitialPopup(false);
     setShowChatbot(true);
-    setIsMinimized(false);
+    setIsMinimized(false); // Ensure it opens expanded
     setUnreadMessages(0);
     
-    // Track engagement
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'chatbot_opened', {
         event_category: 'engagement',
@@ -106,7 +97,6 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
 
   const handleDeclineChat = () => {
     setShowInitialPopup(false);
-    // Show again after 30 minutes if user changes mind
     setTimeout(() => {
       sessionStorage.removeItem('chatbotPopupShown');
     }, 30 * 60 * 1000);
@@ -114,10 +104,9 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
 
   const handleOpenChatbot = () => {
     setShowChatbot(true);
-    setIsMinimized(false);
+    setIsMinimized(false); // Always open expanded
     setUnreadMessages(0);
     
-    // Track engagement
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'chatbot_opened', {
         event_category: 'engagement',
@@ -126,13 +115,16 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
     }
   };
 
+  // ✅ FIXED: Proper close handler
   const handleCloseChatbot = () => {
     setShowChatbot(false);
-    setIsMinimized(false);
+    setIsMinimized(false); // Reset minimized state when closing
   };
 
+  // ✅ FIXED: Minimize handler
   const handleMinimizeChatbot = () => {
     setIsMinimized(!isMinimized);
+    // Don't change showChatbot state - keep it true when minimized
   };
 
   const handleNewMessage = () => {
@@ -151,9 +143,8 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed bottom-4 right-4 z-50 w-96 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6 overflow-hidden"
+            className="fixed bottom-4 right-4 z-[60] w-96 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-6 overflow-hidden"
           >
-            {/* Background decoration */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20" />
             
             <div className="relative z-10">
@@ -228,14 +219,14 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Enhanced Floating Chat Button */}
+      {/* ✅ FIXED: Enhanced Floating Chat Button with corrected visibility logic */}
       <AnimatePresence>
         {!showChatbot && !showInitialPopup && isVisible && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-4 right-4 z-50"
+            className="fixed bottom-4 right-4 z-[50]"
           >
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -244,6 +235,8 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className="relative w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all duration-300 group"
+              type="button"
+              aria-label="Open chat with Arka AI"
             >
               <MessageCircle className="w-7 h-7" />
               
@@ -270,7 +263,7 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
-                    className="absolute right-full mr-3 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap"
+                    className="absolute right-full mr-3 bg-gray-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap pointer-events-none"
                   >
                     Chat with Arka AI
                     <div className="text-xs text-gray-400 mt-1">Ctrl + K</div>
@@ -283,7 +276,7 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Chatbot */}
+      {/* ✅ FIXED: Chatbot with proper z-index */}
       <Chatbot
         isOpen={showChatbot}
         onClose={handleCloseChatbot}
