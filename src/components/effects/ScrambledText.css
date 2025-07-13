@@ -25,6 +25,11 @@
   background-clip:text;
   color:transparent;
   -webkit-text-fill-color:transparent;
+   will-change: transform;
+  display: inline-block;
+  transition: all 0.3s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
    display: inline-block;
 }
 
