@@ -286,31 +286,27 @@ const projects = [
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
           >
            <span className="text-gray-900 dark:text-white">Hi 👋 I'm </span>
-          <ScrambledText
-            className="bg-gradient-to-r text-gray-900 dark:text-white from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block"
-            radius={150}
-            duration={1.5}
-            scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-          >
-            Arkaprabha
-          </ScrambledText>
-          <ScrambledText
-            className="bg-gradient-to-r text-gray-900 dark:text-white from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block"
-            radius={150}
-            duration={1.5}
-            scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-          >
-           &nbsp; {/* Non-breaking space */}
-          </ScrambledText>
-          
-          <ScrambledText
-            className="bg-gradient-to-r text-gray-900 dark:text-white from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block"
-            radius={150}
-            duration={1.5}
-            scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-          >
-            Banerjee
-          </ScrambledText>
+         <div className="flex flex-wrap justify-center items-center gap-4">
+            <ScrambledText
+              className="bg-gradient-to-r text-gray-900 dark:text-white from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block text-4xl md:text-6xl font-bold"
+              radius={150}
+              duration={1.5}
+              delay={0}
+              scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            >
+              Arkaprabha
+            </ScrambledText>
+            
+            <ScrambledText
+              className="bg-gradient-to-r text-gray-900 dark:text-white from-purple-600 to-pink-600 bg-clip-text text-transparent inline-block text-4xl md:text-6xl font-bold"
+              radius={150}
+              duration={1.5}
+              delay={0.3}
+              scrambleChars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            >
+              Banerjee
+            </ScrambledText>
+          </div>
 
           </motion.h1>
           <motion.p
