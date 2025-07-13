@@ -431,18 +431,18 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimi
 I'm **Arka AI**, your personal guide to exploring Arkaprabha's work and expertise.
 
 **Current Time:** ${currentISTTime}
-
+If this is your 1st message then wait for few seconds because my API service is suspended (due to lack of usage) it will restart in 10-15 seconds then you can have your smooth convo. 
 I can help you discover:
 
 **🚀 Featured Projects**
-• Krishak AI - Agricultural disease detection platform
+• Krishak AI - Agricultural optimisation and enhancing platform
 • AutoML SaaS Platform - Automated machine learning solutions  
 • RAG-Powered Assistant - Advanced conversational AI
 
 **💼 Professional Background**
 • Full-Stack ML Engineer from Kolkata, India
 • B.Tech CSE (Data Science) with 9.1/10 CGPA
-• 500+ LeetCode problems solved
+• 300+ LeetCode problems solved
 
 **🔗 Quick Links**
 • **Email**: arkaofficial13@gmail.com
