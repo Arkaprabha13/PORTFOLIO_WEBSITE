@@ -145,7 +145,8 @@ const ChatbotTrigger: React.FC<ChatbotTriggerProps> = ({
 
   const handleMinimizeChatbot = useCallback(() => {
     console.log(`📦 Toggle minimize - ${instanceId.current} - Current: ${isMinimized}`);
-    setIsMinimized(!isMinimized);
+    setShowChatbot(false);
+    setIsMinimized(false);
     // Keep showChatbot = true when minimizing/expanding
   }, [isMinimized]);
 
