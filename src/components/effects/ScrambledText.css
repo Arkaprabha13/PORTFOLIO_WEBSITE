@@ -4,7 +4,7 @@
   max-width: 800px;
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(14px, 4vw, 32px);
-  color: #f8fafc;
+/*   color: #f8fafc; */
   opacity: 1 !important;
   visibility: visible !important;
 }
