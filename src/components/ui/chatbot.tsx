@@ -606,16 +606,21 @@ What would you like to know about Arkaprabha's work?`,
           )}
 
           {/* FIXED: Single Minimized State - No Duplicates */}
-          {isMinimized && (
-            <button
-              className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-colors duration-200 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-400"
-              onClick={onMinimize}
-              type="button"
-              aria-label="Expand chat"
-            >
-              <MessageCircle className="w-6 h-6 text-white" />
-            </button>
-          )}
+         {isMinimized && (
+              <button
+                type="button"
+                className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-colors duration-200 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                onClick={() => {
+                  console.log('🔄 Minimized button clicked - calling onMinimize');
+                  onMinimize();
+                }}
+                aria-label="Expand chat"
+              >
+                <div className="flex items-center justify-center w-full h-full">
+                  <MessageCircle className="w-6 h-6 text-white" />
+                </div>
+              </button>
+            )}
         </Card>
       </motion.div>
     </AnimatePresence>
