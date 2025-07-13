@@ -4,12 +4,12 @@
   max-width: 800px;
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(14px, 4vw, 32px);
-/*   color: #f8fafc; */
+  color: #f8fafc;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-.char {
+/* .char {
   will-change: transform;
   display: inline-block;
   transition: all 0.3s ease;
@@ -17,7 +17,17 @@
   visibility: visible !important;
   display: inline-block;
   
+} */
+/* ScrambledText.css */
+.char{
+  background:inherit;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+   display: inline-block;
 }
+
 .text-block p {
   opacity: 1 !important;
   visibility: visible !important;
