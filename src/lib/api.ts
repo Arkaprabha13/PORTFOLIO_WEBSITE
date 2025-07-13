@@ -19,8 +19,11 @@ export const chatService = {
         mode: 'cors',
         credentials: 'omit',
         body: JSON.stringify({
-          message,      // ✅ Fixed: changed from 'prompt' to 'message'
-          history
+          message,
+          history: history.map(msg => ({
+            role: msg.role,
+            content: msg.content
+          }))
         }),
       });
 
@@ -30,8 +33,12 @@ export const chatService = {
       }
 
       const data = await response.json();
+      
+      // ✅ Filter out <think> tags from the response
+      const cleanResponse = data.response.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+      
       return {
-        response: data.response,    // ✅ Fixed: changed from 'answer' to 'response'
+        response: cleanResponse,
         timestamp: data.timestamp
       };
     } catch (error) {
@@ -42,15 +49,26 @@ export const chatService = {
 
   async checkHealth() {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
       const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.HEALTH}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
         },
         mode: 'cors',
-        credentials: 'omit'
+        credentials: 'omit',
+        signal: controller.signal
       });
-      return response.ok;
+      
+      clearTimeout(timeoutId);
+      
+      if (response.ok) {
+        const data = await response.json();
+        return data.status === 'healthy';
+      }
+      return false;
     } catch (error) {
       console.error('Health check failed:', error);
       return false;
