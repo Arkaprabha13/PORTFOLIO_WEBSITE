@@ -727,22 +727,25 @@ What would you like to know about Arkaprabha's work?`,
           )}
 
           {/* Enhanced Minimized State */}
+                    {/* Fixed Minimized State - Single Icon Only */}
           {isMinimized && (
-            <div 
-              className="w-full h-full flex items-center justify-center cursor-pointer bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-200 group"
+            <motion.button
+              className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-200 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
               onClick={onMinimize}
-              aria-label="Expand chat"
+              aria-label="Expand Arka AI Assistant"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="button"
             >
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="relative"
-              >
-                <MessageCircle className="w-8 h-8 text-white" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse" />
-              </motion.div>
-            </div>
+              {/* Single Icon Container */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <MessageCircle className="w-6 h-6 text-white" />
+                {/* Optional: Single status dot */}
+                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-400 rounded-full border border-white" />
+              </div>
+            </motion.button>
           )}
+
         </Card>
       </motion.div>
     </AnimatePresence>
