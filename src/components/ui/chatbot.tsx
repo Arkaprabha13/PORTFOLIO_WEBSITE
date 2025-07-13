@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, Send, MessageCircle, Minimize2, Maximize2, AlertCircle, 
   User, Bot, Sparkles, ExternalLink, Github, Linkedin, Mail,
-  Coffee, Clock, Zap
+  Coffee, Clock, Zap, Monitor, Briefcase
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -13,6 +13,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { chatService } from '@/lib/api';
 
+// ===== INTERFACES =====
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -27,7 +28,104 @@ interface ChatbotProps {
   isMinimized: boolean;
 }
 
-// Enhanced markdown components with portfolio styling
+// ===== UTILITY FUNCTIONS =====
+const ISTTimeUtils = {
+  // Get current IST timestamp
+  getCurrentIST: (): string => {
+    return new Date().toISOString();
+  },
+
+  // Format timestamp to IST with various options
+  formatToIST: (timestamp: string, options?: {
+    showDate?: boolean;
+    showSeconds?: boolean;
+    relative?: boolean;
+    compact?: boolean;
+  }): string => {
+    try {
+      const date = new Date(timestamp);
+      const now = new Date();
+      const { showDate = false, showSeconds = false, relative = true, compact = false } = options || {};
+
+      // Relative time formatting for recent messages
+      if (relative) {
+        const diffMs = now.getTime() - date.getTime();
+        const diffMins = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMins / 60);
+        
+        if (diffMins < 1) return 'Just now';
+        if (diffMins < 60) return `${diffMins}m ago`;
+        if (diffHours < 24) return `${diffHours}h ago`;
+      }
+
+      // Determine if it's today
+      const isToday = date.toDateString() === now.toDateString();
+      const yesterday = new Date(now);
+      yesterday.setDate(yesterday.getDate() - 1);
+      const isYesterday = date.toDateString() === yesterday.toDateString();
+
+      // Format time with IST timezone
+      const timeFormat: Intl.DateTimeFormatOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata'
+      };
+
+      if (showSeconds) {
+        timeFormat.second = '2-digit';
+      }
+
+      const timeString = date.toLocaleTimeString('en-IN', timeFormat);
+
+      // Compact mode
+      if (compact) {
+        if (isToday) return `${timeString} IST`;
+        if (isYesterday) return 'Yesterday';
+        return date.toLocaleDateString('en-IN', { 
+          month: 'short', 
+          day: 'numeric',
+          timeZone: 'Asia/Kolkata'
+        });
+      }
+
+      // Full formatting with IST indication
+      if (isToday) {
+        return showDate ? `Today, ${timeString} IST` : `${timeString} IST`;
+      } else if (isYesterday) {
+        return `Yesterday, ${timeString} IST`;
+      } else {
+        const dateString = date.toLocaleDateString('en-IN', {
+          month: 'short',
+          day: 'numeric',
+          timeZone: 'Asia/Kolkata'
+        });
+        return `${dateString}, ${timeString} IST`;
+      }
+    } catch (error) {
+      // Fallback to current IST time
+      return new Date().toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata'
+      }) + ' IST';
+    }
+  },
+
+  // Check if timestamp is from today
+  isToday: (timestamp: string): boolean => {
+    try {
+      const date = new Date(timestamp);
+      const today = new Date();
+      return date.toDateString() === today.toDateString();
+    } catch {
+      return false;
+    }
+  }
+};
+
+// ===== ENHANCED MARKDOWN COMPONENTS =====
 const MarkdownComponents = {
   strong: ({ children }: { children: React.ReactNode }) => (
     <strong className="font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-1 py-0.5 rounded">
@@ -90,13 +188,33 @@ const MarkdownComponents = {
   ),
 };
 
-// Quick action buttons for common portfolio queries
-const QuickActions = ({ onAction }: { onAction: (message: string) => void }) => {
+// ===== QUICK ACTION BUTTONS =====
+const QuickActions: React.FC<{ onAction: (message: string) => void }> = ({ onAction }) => {
   const actions = [
-    { icon: User, label: "About", message: "Tell me about Arkaprabha's background and experience" },
-    { icon: Zap, label: "Projects", message: "What are Arkaprabha's most impressive projects?" },
-    { icon: Coffee, label: "Skills", message: "What technical skills does Arkaprabha have?" },
-    { icon: Github, label: "GitHub", message: "Show me Arkaprabha's GitHub profile and repositories" },
+    { 
+      icon: User, 
+      label: "About", 
+      message: "Tell me about Arkaprabha's background and experience",
+      color: "from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/30"
+    },
+    { 
+      icon: Zap, 
+      label: "Projects", 
+      message: "What are Arkaprabha's most impressive projects?",
+      color: "from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/30"
+    },
+    { 
+      icon: Coffee, 
+      label: "Skills", 
+      message: "What technical skills does Arkaprabha have?",
+      color: "from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-900/30"
+    },
+    { 
+      icon: Github, 
+      label: "GitHub", 
+      message: "Show me Arkaprabha's GitHub profile and repositories",
+      color: "from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-900/30"
+    },
   ];
 
   return (
@@ -108,10 +226,10 @@ const QuickActions = ({ onAction }: { onAction: (message: string) => void }) => 
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
           onClick={() => onAction(action.message)}
-          className="flex items-center space-x-2 p-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 rounded-lg border border-blue-200 dark:border-blue-700/50 transition-all duration-200 hover:scale-105"
+          className={`flex items-center space-x-2 p-3 bg-gradient-to-r ${action.color} hover:scale-105 rounded-lg border border-gray-200 dark:border-gray-700/50 transition-all duration-200 group`}
         >
-          <action.icon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-          <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+          <action.icon className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300" />
+          <span className="text-xs font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200">
             {action.label}
           </span>
         </motion.button>
@@ -120,36 +238,94 @@ const QuickActions = ({ onAction }: { onAction: (message: string) => void }) => 
   );
 };
 
-// Enhanced message content with better formatting
+// ===== ENHANCED MESSAGE COMPONENT =====
 const MessageContent: React.FC<{ message: Message }> = ({ message }) => {
+  const [showTimestampDetails, setShowTimestampDetails] = useState(false);
+
   if (message.role === 'user') {
     return (
-      <div className="flex items-start space-x-2">
-        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-          <User className="w-3 h-3 text-white" />
+      <div className="space-y-2">
+        <div className="flex items-start space-x-2">
+          <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <User className="w-3 h-3 text-white" />
+          </div>
+          <p className="text-sm whitespace-pre-wrap leading-relaxed flex-1">{message.content}</p>
         </div>
-        <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+        {message.timestamp && (
+          <div className="text-xs opacity-70 ml-8 flex items-center space-x-1">
+            <Clock className="w-3 h-3" />
+            <span>{ISTTimeUtils.formatToIST(message.timestamp, { compact: true })}</span>
+            {ISTTimeUtils.isToday(message.timestamp) && (
+              <div className="w-2 h-2 bg-green-400 rounded-full" title="Today" />
+            )}
+          </div>
+        )}
       </div>
     );
   }
 
+  // Clean AI response content
   const cleanContent = message.content.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
 
   return (
-    <div className="flex items-start space-x-2">
-      <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-        <Bot className="w-3 h-3 text-white" />
+    <div className="space-y-2">
+      <div className="flex items-start space-x-2">
+        <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <Bot className="w-3 h-3 text-white" />
+        </div>
+        <div className="text-sm flex-1">
+          <ReactMarkdown components={MarkdownComponents}>
+            {cleanContent}
+          </ReactMarkdown>
+        </div>
       </div>
-      <div className="text-sm flex-1">
-        <ReactMarkdown components={MarkdownComponents}>
-          {cleanContent}
-        </ReactMarkdown>
-      </div>
+      
+      {/* Enhanced timestamp with IST display */}
+      {message.timestamp && (
+        <div 
+          className="text-xs opacity-70 ml-8 cursor-pointer hover:opacity-100 transition-opacity"
+          onClick={() => setShowTimestampDetails(!showTimestampDetails)}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-1">
+              <Clock className="w-3 h-3" />
+              <span>{ISTTimeUtils.formatToIST(message.timestamp, { relative: true })}</span>
+              {ISTTimeUtils.isToday(message.timestamp) && (
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" title="Today" />
+              )}
+            </div>
+            <Badge variant="secondary" className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">
+              IST
+            </Badge>
+          </div>
+          
+          {/* Expandable timestamp details */}
+          <AnimatePresence>
+            {showTimestampDetails && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 p-2 rounded border border-gray-200 dark:border-gray-700"
+              >
+                <div className="space-y-1">
+                  <div>Full time: {ISTTimeUtils.formatToIST(message.timestamp, { 
+                    showDate: true, 
+                    showSeconds: true, 
+                    relative: false 
+                  })}</div>
+                  <div>Local time: {new Date(message.timestamp).toLocaleString()}</div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 };
 
-// Enhanced typing indicator with gradient animation
+// ===== ENHANCED TYPING INDICATOR =====
 const TypingIndicator: React.FC = () => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
@@ -182,7 +358,7 @@ const TypingIndicator: React.FC = () => (
   </motion.div>
 );
 
-// Enhanced error message with actionable suggestions
+// ===== ENHANCED ERROR MESSAGE =====
 const ErrorMessage: React.FC<{ error: string; onRetry: () => void }> = ({ error, onRetry }) => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
@@ -217,26 +393,7 @@ const ErrorMessage: React.FC<{ error: string; onRetry: () => void }> = ({ error,
   </motion.div>
 );
 
-// Format timestamp to IST
-const formatToIST = (timestamp: string): string => {
-  try {
-    const date = new Date(timestamp);
-    return date.toLocaleString('en-IN', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: 'Asia/Kolkata'
-    });
-  } catch (error) {
-    return new Date().toLocaleTimeString('en-IN', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: 'Asia/Kolkata'
-    });
-  }
-};
-
+// ===== MAIN CHATBOT COMPONENT =====
 const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimized }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -244,8 +401,25 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimi
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showQuickActions, setShowQuickActions] = useState(true);
+  const [currentTime, setCurrentTime] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Update current IST time every minute
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(ISTTimeUtils.formatToIST(ISTTimeUtils.getCurrentIST(), { 
+        showSeconds: false, 
+        relative: false 
+      }));
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 60000); // Update every minute
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-scroll to bottom
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -254,14 +428,23 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimize, isMinimi
     scrollToBottom();
   }, [messages, isTyping]);
 
-  // Enhanced greeting message
+  // Enhanced greeting message with current IST time
   useEffect(() => {
     if (isOpen && messages.length === 0) {
+      const currentISTTime = ISTTimeUtils.formatToIST(ISTTimeUtils.getCurrentIST(), {
+        showDate: true,
+        relative: false
+      });
+      
       const initialMessage: Message = {
         role: 'assistant',
         content: `## Welcome to Arkaprabha's Portfolio! 👋
 
-I'm **Arka AI**, your personal guide to exploring Arkaprabha's work and expertise. I can help you discover:
+I'm **Arka AI**, your personal guide to exploring Arkaprabha's work and expertise.
+
+**Current Time:** ${currentISTTime}
+
+I can help you discover:
 
 **🚀 Featured Projects**
 • Krishak AI - Agricultural disease detection platform
@@ -279,19 +462,21 @@ I'm **Arka AI**, your personal guide to exploring Arkaprabha's work and expertis
 • **LinkedIn**: https://linkedin.com/in/arkaprabha-banerjee-936b29253
 
 What would you like to know about Arkaprabha's work?`,
-        timestamp: new Date().toISOString(),
+        timestamp: ISTTimeUtils.getCurrentIST(),
         id: 'initial'
       };
       setMessages([initialMessage]);
     }
   }, [isOpen, messages.length]);
 
+  // Handle quick actions
   const handleQuickAction = (message: string) => {
     setInput(message);
     setShowQuickActions(false);
     setTimeout(() => sendMessage(0, message), 100);
   };
 
+  // Enhanced send message function with IST timestamps
   const sendMessage = async (retryCount = 0, quickMessage?: string) => {
     const messageToSend = quickMessage || input;
     if (!messageToSend.trim() || isLoading) return;
@@ -299,7 +484,7 @@ What would you like to know about Arkaprabha's work?`,
     const userMessage: Message = {
       role: 'user',
       content: messageToSend,
-      timestamp: new Date().toISOString(),
+      timestamp: ISTTimeUtils.getCurrentIST(),
       id: Date.now().toString()
     };
 
@@ -322,7 +507,7 @@ What would you like to know about Arkaprabha's work?`,
       const assistantMessage: Message = {
         role: 'assistant',
         content: data.response,
-        timestamp: data.timestamp || new Date().toISOString(),
+        timestamp: ISTTimeUtils.getCurrentIST(), // Use local IST time
         id: Date.now().toString()
       };
 
@@ -332,6 +517,7 @@ What would you like to know about Arkaprabha's work?`,
       setIsTyping(false);
       console.error('Error sending message:', error);
       
+      // Retry logic
       if (retryCount < 1 && (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError'))) {
         setTimeout(() => {
           if (!quickMessage) setInput(messageToSend);
@@ -357,6 +543,16 @@ What would you like to know about Arkaprabha's work?`,
     }
   };
 
+  // Retry last message
+  const retryLastMessage = () => {
+    setError(null);
+    const lastUserMessage = messages.filter(m => m.role === 'user').pop();
+    if (lastUserMessage) {
+      sendMessage(0, lastUserMessage.content);
+    }
+  };
+
+  // Event handlers
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -367,14 +563,6 @@ What would you like to know about Arkaprabha's work?`,
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
     if (error) setError(null);
-  };
-
-  const retryLastMessage = () => {
-    setError(null);
-    const lastUserMessage = messages.filter(m => m.role === 'user').pop();
-    if (lastUserMessage) {
-      sendMessage(0, lastUserMessage.content);
-    }
   };
 
   if (!isOpen) return null;
@@ -395,7 +583,7 @@ What would you like to know about Arkaprabha's work?`,
         } transition-all duration-300`}
       >
         <Card className="w-full h-full flex flex-col shadow-2xl border-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg overflow-hidden">
-          {/* Enhanced Header */}
+          {/* Enhanced Header with IST time */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse" />
             <div className="flex items-center space-x-3 relative z-10">
@@ -413,6 +601,9 @@ What would you like to know about Arkaprabha's work?`,
                   <p className="text-xs opacity-90 flex items-center space-x-1">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                     <span>{isTyping ? 'Arka is typing...' : 'Ready to help'}</span>
+                    <span>•</span>
+                    <Clock className="w-3 h-3" />
+                    <span>{currentTime}</span>
                   </p>
                 </div>
               )}
@@ -441,7 +632,7 @@ What would you like to know about Arkaprabha's work?`,
             )}
           </div>
 
-          {/* Messages Area */}
+          {/* Enhanced Messages Area */}
           {!isMinimized && (
             <>
               <ScrollArea className="flex-1 p-4 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/50 dark:to-gray-900">
@@ -477,14 +668,6 @@ What would you like to know about Arkaprabha's work?`,
                         }`}
                       >
                         <MessageContent message={message} />
-                        {message.timestamp && (
-                          <div className={`text-xs mt-2 flex items-center space-x-1 ${
-                            message.role === 'user' ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'
-                          }`}>
-                            <Clock className="w-3 h-3" />
-                            <span>{formatToIST(message.timestamp)}</span>
-                          </div>
-                        )}
                       </div>
                     </motion.div>
                   ))}
@@ -495,7 +678,7 @@ What would you like to know about Arkaprabha's work?`,
                 <div ref={messagesEndRef} />
               </ScrollArea>
 
-              {/* Enhanced Input Area */}
+              {/* Enhanced Input Area with IST indicator */}
               <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
                 <div className="flex space-x-3">
                   <div className="flex-1 relative">
@@ -533,7 +716,11 @@ What would you like to know about Arkaprabha's work?`,
                 </div>
                 <div className="text-xs text-gray-500 mt-2 flex items-center justify-between">
                   <span>Press Enter to send</span>
-                  <span className="text-blue-600 dark:text-blue-400">Powered by Arka AI</span>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="w-3 h-3" />
+                    <span>IST {currentTime.split(' IST')[0]}</span>
+                    <span className="text-blue-600 dark:text-blue-400">• Powered by Arka AI</span>
+                  </div>
                 </div>
               </div>
             </>
