@@ -3,7 +3,8 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import { 
   Calendar, MapPin, GraduationCap, Award, Code, Heart, Sun, Moon, 
   ChevronDown, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, 
-  Download, FileText, Mail, Github, Linkedin, ExternalLink 
+  Download, FileText, Mail, Github, Linkedin, ExternalLink, Sparkles,
+  TrendingUp, Target, Users, Zap, BookOpen, Coffee, Gamepad2
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,8 @@ import {
   Navbar, NavBody, NavItems, MobileNav, NavbarLogo, NavbarButton,
   MobileNavHeader, MobileNavToggle, MobileNavMenu,
 } from '@/components/ui/resizable-navbar';
-import '../components/Timeline.css'; // ← Correct import path
+import ScrollStack, { ScrollStackItem } from '../components/ScrollStack/ScrollStack';
+
 const About = () => {
   // State Management
   const [darkMode, setDarkMode] = useState(false);
@@ -26,6 +28,7 @@ const About = () => {
   const [clickCount, setClickCount] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showConfetti, setShowConfetti] = useState(false);
+  const [timelineKey, setTimelineKey] = useState(0);
 
   // Refs for animations
   const heroRef = useRef(null);
@@ -45,7 +48,7 @@ const About = () => {
     { name: 'Contact', link: '/contact' }
   ];
 
-  // Timeline Data
+  // Enhanced Timeline Data
   const timelineData = [
     {
       year: '2022',
@@ -58,7 +61,8 @@ const About = () => {
         'CGPA: 9.1/10',
         'Programming Started with C',
         'Data Science Specialization'
-      ]
+      ],
+      tags: ['Education', 'Foundation', 'CS Engineering']
     },
     {
       year: '2023',
@@ -71,7 +75,8 @@ const About = () => {
         'LeetCode: 100+ Problems Solved',
         'GeeksforGeeks: 200+ Problems Solved',
         'Built first projects'
-      ]
+      ],
+      tags: ['Programming', 'C++', 'Python']
     },
     {
       year: '2024',
@@ -84,7 +89,8 @@ const About = () => {
         'Team collaboration experience',
         'Real-world problem solving',
         'Network with industry professionals'
-      ]
+      ],
+      tags: ['Hackathon', 'AI/ML', 'Teamwork']
     },
     {
       year: '2024',
@@ -97,7 +103,8 @@ const About = () => {
         '500+ Problems Solved',
         'Mentored 50+ Students',
         'Open source contributions'
-      ]
+      ],
+      tags: ['Open Source', 'DSA', 'Mentoring']
     },
     {
       year: '2024',
@@ -110,80 +117,56 @@ const About = () => {
         '20+ learning projects',
         '5+ Major Projects',
         'Full-stack development skills'
-      ]
+      ],
+      tags: ['Full-Stack', 'Projects', 'Development']
     },
     {
       year: '2025',
       title: 'Built Krishak AI Platform',
       description: 'Agricultural AI platform with 99.35% disease detection accuracy using advanced CNN models',
-      icon: Award,
+      icon: Sparkles,
       color: 'from-green-500 to-teal-600',
       duration: '3 months',
       achievements: [
         '99.35% Disease Detection Accuracy',
         '1000+ Farmers Helped',
         'Featured in Tech Communities'
-      ]
+      ],
+      tags: ['AI', 'Agriculture', 'CNN']
     },
     {
       year: '2025',
       title: 'Full-Stack ML Engineer',
       description: 'Specializing in LangChain, FAISS, RAG systems, and intelligent automation',
-      icon: Heart,
+      icon: TrendingUp,
       color: 'from-orange-500 to-red-600',
       duration: 'Present',
       achievements: [
         '8+ Major Projects Completed',
         'Industry Recognition',
         'Advanced AI/ML Expertise'
-      ]
+      ],
+      tags: ['ML Engineering', 'LangChain', 'RAG Systems']
     }
   ];
 
-  // Skills Data
+  // Enhanced Skills Data
   const skills = [
-    // Programming Languages & Core Tech
     { name: 'Python', level: 95, color: '#3776ab', description: 'Advanced scripting, ML/AI, automation, data pipelines' },
     { name: 'JavaScript/TypeScript', level: 90, color: '#f7df1e', description: 'Modern web apps, async patterns, scalable codebases' },
     { name: 'C++/C#', level: 70, color: '#00599c', description: 'System-level programming, backend APIs, performance-critical modules' },
     { name: 'SQL & NoSQL', level: 88, color: '#00618a', description: 'Relational (PostgreSQL, MySQL), document (MongoDB), vector DBs (FAISS)' },
-
-    // Web & Frontend
     { name: 'React/Next.js', level: 90, color: '#61dafb', description: 'Component-based architecture, server-side rendering, modern hooks' },
-    { name: 'HTML5 & CSS3', level: 85, color: '#e44d26', description: 'Responsive design, accessibility, modern layouts' },
-    { name: 'Tailwind CSS', level: 80, color: '#38bdf8', description: 'Utility-first styling, rapid prototyping, dark mode' },
-
-    // Backend & APIs
-    { name: 'Django/DRF', level: 88, color: '#092e20', description: 'REST APIs, admin panels, ORM, authentication systems' },
-    { name: 'FastAPI', level: 90, color: '#009688', description: 'Async microservices, OpenAPI docs, blazing-fast endpoints' },
-    { name: 'Flask', level: 80, color: '#000000', description: 'Lightweight APIs, webhooks, internal tooling' },
-    { name: 'Supabase', level: 85, color: '#3ecf8e', description: 'Real-time DB, auth, storage, Postgres at scale' },
-
-    // AI/ML & Data
     { name: 'Machine Learning', level: 92, color: '#ff6f00', description: 'Deep learning, computer vision, NLP, model deployment' },
     { name: 'LangChain', level: 85, color: '#1c3d5c', description: 'RAG systems, multi-agent architectures, LLM pipelines' },
     { name: 'FAISS/Qdrant', level: 90, color: '#4285f4', description: 'Vector search, embeddings, retrieval-augmented generation' },
-    { name: 'OpenCV/YOLO', level: 88, color: '#5c3317', description: 'Computer vision, object detection, real-time processing' },
+    { name: 'FastAPI', level: 90, color: '#009688', description: 'Async microservices, OpenAPI docs, blazing-fast endpoints' },
     { name: 'Streamlit', level: 90, color: '#ff4b4b', description: 'Interactive dashboards, rapid ML prototyping' },
-
-    // Data Structures & Algorithms
     { name: 'DSA/Problem Solving', level: 90, color: '#00bcd4', description: '500+ LeetCode/GFG problems, optimization algorithms' },
-
-    // Testing & Quality
-    { name: 'Testing & Debugging', level: 85, color: '#4caf50', description: 'Unit testing, integration testing, performance optimization' },
-
-    // Tools & Workflow
-    { name: 'Git & Version Control', level: 90, color: '#f34f29', description: 'Branching strategies, code reviews, collaborative development' },
-    { name: 'Development Tools', level: 85, color: '#007acc', description: 'VSCode, PyCharm, productivity optimization' },
-
-    // Soft Skills
-    { name: 'Communication', level: 90, color: '#2196f3', description: 'Technical writing, documentation, stakeholder communication' },
-    { name: 'Team Collaboration', level: 88, color: '#8bc34a', description: 'Agile methodologies, peer reviews, mentoring' },
-    { name: 'Problem Solving', level: 92, color: '#ff9800', description: 'Analytical thinking, creative solutions, debugging expertise' },
-    { name: 'Adaptability', level: 85, color: '#9c27b0', description: 'Learning new technologies, adapting to changing requirements' }
+    { name: 'Git & Version Control', level: 90, color: '#f34f29', description: 'Branching strategies, code reviews, collaborative development' }
   ];
 
-  // Fun Facts Data
+  // Enhanced Fun Facts
   const funFacts = [
     { 
       icon: '🏆', 
@@ -226,20 +209,6 @@ const About = () => {
       value: '99.35%', 
       details: 'Achieved in crop disease detection using advanced CNN models',
       color: 'from-green-400 to-blue-500'
-    },
-    { 
-      icon: '⏱️', 
-      label: 'Development Speed', 
-      value: '80% Faster', 
-      details: 'AutoML platform reduces traditional model development time',
-      color: 'from-cyan-400 to-blue-500'
-    },
-    { 
-      icon: '🔧', 
-      label: 'API Response Time', 
-      value: '<400ms', 
-      details: 'Optimized backend performance with efficient algorithms',
-      color: 'from-orange-400 to-red-500'
     }
   ];
 
@@ -283,15 +252,6 @@ const About = () => {
     }, 30);
     return () => clearInterval(timer);
   }, []);
-
-  useEffect(() => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        setActiveTimeline(prev => (prev + 1) % timelineData.length);
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [isPlaying, timelineData.length]);
 
   // Event Handlers
   const handleAvatarClick = () => {
@@ -607,40 +567,6 @@ const About = () => {
                 </motion.button>
               </motion.div>
 
-              {/* Resume Preview Card */}
-              <motion.div
-                variants={itemVariants}
-                className="max-w-md mx-auto mb-6 sm:mb-8 px-4"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.02, rotateY: 5 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg border border-gray-200 dark:border-gray-700"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <FileText className="h-5 w-5 text-white" />
-                      </div>
-                      <div className="text-left">
-                        <h3 className="font-semibold text-gray-900 dark:text-white">Resume</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">PDF • Updated 2025</p>
-                      </div>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      onClick={handleResumeDownload}
-                      className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors min-w-[40px] min-h-[40px]"
-                    >
-                      <Download className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                    </motion.button>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 text-left">
-                    Complete overview of my experience, skills, and achievements in Full-Stack ML Engineering.
-                  </p>
-                </motion.div>
-              </motion.div>
-
               {/* Social Links */}
               <motion.div
                 variants={itemVariants}
@@ -672,251 +598,153 @@ const About = () => {
                   <Mail className="h-6 w-6" />
                 </motion.a>
               </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                className="flex justify-center"
-              >
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-blue-600 dark:text-blue-400"
-                >
-                  <ChevronDown className="h-6 w-6 sm:h-8 sm:w-8" />
-                </motion.div>
-              </motion.div>
             </motion.div>
           </div>
         </section>
 
-       {/* Enhanced Mobile-Responsive Timeline Section - FIXED VERSION */}
-<section className="py-12 sm:py-20 bg-white dark:bg-gray-800 relative" ref={timelineRef}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="text-center mb-8 sm:mb-16"
-    >
-      <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-8 text-gray-900 dark:text-white">
-        My Journey
-      </h2>
-      <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8">
-        From curious beginner to Full-Stack ML Engineer - here's how my passion for technology evolved
-      </p>
-      
-      {/* Enhanced Control Panel */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsPlaying(!isPlaying)}
-          className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors min-h-[44px] text-sm sm:text-base"
-        >
-          {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          {isPlaying ? 'Pause Auto-Play' : 'Auto-Play Journey'}
-        </motion.button>
-        
-        <div className="hidden sm:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-          <span>{activeTimeline + 1}</span>
-          <span>/</span>
-          <span>{timelineData.length}</span>
-        </div>
-      </div>
-    </motion.div>
-    
-    {/* FIXED Timeline Container */}
-    <div className="relative">
-      {/* Central Timeline Line - PROPERLY POSITIONED */}
-      <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-0.5 w-0.5 h-full bg-gradient-to-b from-blue-600 to-purple-600 z-10"></div>
-      
-      {/* Timeline Items - FIXED ALTERNATING LAYOUT */}
-      <div className="space-y-12 md:space-y-16">
-        {timelineData.map((item, index) => {
-          const isEven = index % 2 === 0;
-          
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative flex items-center ${
-                // Mobile: all items align left with proper spacing
-                // Desktop: alternating left-right layout
-                'md:' + (isEven ? 'justify-start' : 'justify-end')
-              }`}
-              onMouseEnter={() => setActiveTimeline(index)}
-              onTouchStart={() => setActiveTimeline(index)}
-            >
-              {/* Timeline Icon - PERFECTLY CENTERED */}
-              <motion.div 
-                className="absolute left-6 md:left-1/2 md:transform md:-translate-x-1/2 w-12 h-12 rounded-full z-20 flex items-center justify-center shadow-lg"
-                whileHover={{ scale: 1.1 }}
-                animate={activeTimeline === index ? { 
-                  scale: 1.15, 
-                  boxShadow: "0 0 25px rgba(59, 130, 246, 0.6)" 
-                } : { scale: 1 }}
-                style={{
-                  background: `linear-gradient(135deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`
-                }}
-              >
-                <item.icon className="h-6 w-6 text-white" />
-              </motion.div>
-              
-              {/* Content Container - PROPER POSITIONING */}
-              <div className={`
-                w-full ml-20 md:ml-0 md:w-5/12
-                ${isEven ? 'md:pr-16' : 'md:pl-16'}
-              `}>
+        {/* Enhanced ScrollStack Timeline Section */}
+        <section className="relative bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900/20 dark:via-blue-900/20 dark:to-indigo-900/20" ref={timelineRef}>
+          <div className="relative">
+            {/* Section Header */}
+            <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-purple-50 via-blue-50 to-transparent dark:from-purple-900/20 dark:via-blue-900/20 dark:to-transparent">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="relative"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center"
                 >
-                  {/* Connection Line to Icon - DESKTOP ONLY */}
-                  <div className={`hidden md:block absolute top-6 w-8 h-0.5 bg-gray-300 dark:bg-gray-600 ${
-                    isEven ? 'right-0' : 'left-0'
-                  }`}></div>
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-8 text-gray-900 dark:text-white">
+                    My Journey
+                  </h2>
+                  <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8">
+                    From curious beginner to Full-Stack ML Engineer - scroll through my evolution in tech
+                  </p>
                   
-                  <Card className={`timeline-card transition-all duration-300 ${
-                    activeTimeline === index ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-lg'
-                  } bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600`}>
-                    <CardHeader className="pb-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <div className="flex items-center space-x-3">
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                            {item.year}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                          <Calendar className="h-3 w-3" />
-                          <span>{item.duration}</span>
-                        </div>
-                      </div>
-                      <CardTitle className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mt-2">
-                        {item.title}
-                      </CardTitle>
-                    </CardHeader>
+                  <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        setIsPlaying(!isPlaying);
+                        setTimelineKey(prev => prev + 1); // Force re-render
+                      }}
+                      className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors min-h-[44px] text-sm sm:text-base"
+                    >
+                      {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                      {isPlaying ? 'Pause Scroll' : 'Auto Scroll'}
+                    </motion.button>
                     
-                    <CardContent className="pt-0">
-                      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                        {item.description}
-                      </p>
-                      
-                      {/* Achievements Section */}
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={activeTimeline === index ? { 
-                          height: 'auto', 
-                          opacity: 1 
-                        } : { 
-                          height: 0, 
-                          opacity: 0 
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
-                          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                            <Award className="h-4 w-4 text-yellow-500" />
-                            Key Achievements
-                          </h4>
-                          <div className="space-y-2">
-                            {item.achievements.map((achievement, idx) => (
-                              <motion.div
-                                key={idx}
-                                initial={{ x: -10, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="flex items-start gap-2 text-sm"
-                              >
-                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                  {achievement}
-                                </span>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                      
-                      {/* Expand Button */}
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => setActiveTimeline(activeTimeline === index ? -1 : index)}
-                        className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors min-h-[44px]"
-                      >
-                        <span className="sm:hidden">
-                          {activeTimeline === index ? 'Show Less' : 'Show More'}
-                        </span>
-                        <span className="hidden sm:inline">
-                          {activeTimeline === index ? 'Collapse' : 'Expand Details'}
-                        </span>
-                        <ChevronDown className={`h-4 w-4 transform transition-transform ${
-                          activeTimeline === index ? 'rotate-180' : ''
-                        }`} />
-                      </motion.button>
-                    </CardContent>
-                  </Card>
+                    <div className="hidden sm:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span>Scroll to explore</span>
+                      <ChevronDown className="h-4 w-4 animate-bounce" />
+                    </div>
+                  </div>
                 </motion.div>
               </div>
-            </motion.div>
-          );
-        })}
-      </div>
-      
-      {/* Mobile Progress Indicator */}
-      <div className="md:hidden mt-8 flex justify-center">
-        <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full">
-          <span className="text-sm text-gray-600 dark:text-gray-400">
-            {activeTimeline + 1} of {timelineData.length}
-          </span>
-          <div className="flex gap-1">
-            {timelineData.map((_, index) => (
-              <div
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === activeTimeline ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-              />
-            ))}
+            </div>
+
+            {/* ScrollStack Timeline */}
+            <ScrollStack
+              key={timelineKey}
+              className="timeline-scroll-stack"
+              itemDistance={120}
+              itemScale={0.05}
+              itemStackDistance={40}
+              stackPosition="25%"
+              scaleEndPosition="15%"
+              baseScale={0.9}
+              rotationAmount={2}
+              blurAmount={1}
+              onStackComplete={() => {
+                setShowConfetti(true);
+                setTimeout(() => setShowConfetti(false), 2000);
+              }}
+            >
+              {timelineData.map((item, index) => (
+                <ScrollStackItem key={index} itemClassName="timeline-card">
+                  <div className="relative">
+                    {/* Year Badge */}
+                    <div className="timeline-year-badge">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-bold text-lg shadow-lg"
+                      >
+                        {item.year}
+                      </motion.div>
+                    </div>
+
+                    {/* Icon */}
+                    <div className="timeline-icon-wrapper">
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: index * 0.1 + 0.2 }}
+                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl"
+                        style={{
+                          background: `linear-gradient(135deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`
+                        }}
+                      >
+                        <item.icon className="h-8 w-8 text-white" />
+                      </motion.div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="mt-8 mb-6">
+                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <Calendar className="h-4 w-4" />
+                        <span>{item.duration}</span>
+                      </div>
+                      
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                        {item.title}
+                      </h3>
+                      
+                      <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                        {item.description}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {item.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Achievements */}
+                    <div className="timeline-achievements">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                        <Award className="h-5 w-5 text-yellow-500" />
+                        Key Achievements
+                      </h4>
+                      <div className="space-y-3">
+                        {item.achievements.map((achievement, achIndex) => (
+                          <div key={achIndex} className="timeline-achievement-item">
+                            <div className="timeline-achievement-dot" />
+                            <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                              {achievement}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </ScrollStackItem>
+              ))}
+            </ScrollStack>
           </div>
-        </div>
-      </div>
-    </div>
-    
-    {/* Navigation Controls */}
-    <div className="mt-8 sm:mt-12 flex justify-center">
-      <div className="flex gap-2 sm:gap-4">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))}
-          disabled={activeTimeline === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">Previous</span>
-        </motion.button>
-        
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setActiveTimeline(Math.min(timelineData.length - 1, activeTimeline + 1))}
-          disabled={activeTimeline === timelineData.length - 1}
-          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
-        >
-          <span className="hidden sm:inline">Next</span>
-          <ChevronRight className="h-4 w-4" />
-        </motion.button>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
         {/* Enhanced Skills Section */}
-        <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900" ref={skillsRef}>
+        <section className="py-12 sm:py-20 bg-white dark:bg-gray-800" ref={skillsRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
@@ -937,7 +765,7 @@ const About = () => {
                   whileHover={{ scale: 1.02 }}
                   onMouseEnter={() => setHoveredSkill(index)}
                   onMouseLeave={() => setHoveredSkill(null)}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                  className="bg-white dark:bg-gray-700 rounded-lg p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">{skill.name}</span>
@@ -949,7 +777,7 @@ const About = () => {
                     </motion.span>
                   </div>
                   
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 sm:h-3 mb-2 overflow-hidden">
+                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2 sm:h-3 mb-2 overflow-hidden">
                     <motion.div
                       variants={skillVariants}
                       initial="hidden"
@@ -990,7 +818,7 @@ const About = () => {
         </section>
 
         {/* Interactive Fun Facts Section */}
-        <section className="py-12 sm:py-20 bg-white dark:bg-gray-800">
+        <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
@@ -1001,7 +829,7 @@ const About = () => {
               Fun Facts
             </motion.h2>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
               {funFacts.map((fact, index) => (
                 <motion.div
                   key={index}
@@ -1010,7 +838,7 @@ const About = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, rotateY: 10 }}
                   onClick={() => setExpandedFact(expandedFact === index ? null : index)}
-                  className="text-center cursor-pointer group"
+                  className="text-center cursor-pointer group bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <motion.div 
                     className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 bg-gradient-to-r ${fact.color} rounded-full flex items-center justify-center text-2xl sm:text-4xl relative overflow-hidden`}
@@ -1040,7 +868,7 @@ const About = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 px-2">
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2">
                       {fact.details}
                     </p>
                   </motion.div>
@@ -1050,127 +878,47 @@ const About = () => {
           </div>
         </section>
 
-        {/* Enhanced Personal Story Section */}
-        <section className="py-12 sm:py-20 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900 dark:to-gray-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white">
-                  What Drives Me
-                </h2>
-                <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    My passion for technology started early, sparked by curiosity about how intelligent systems can solve complex real-world problems. 
-                    The intersection of AI and practical application became my driving force—creating solutions that don't just showcase technical prowess, 
-                    but genuinely improve people's lives.
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    From developing agricultural AI platforms that help farmers detect crop diseases with 99.35% accuracy to creating AutoML systems 
-                    that democratize machine learning for non-technical users, I believe technology should be accessible, impactful, and transformative. 
-                    Every project I build is guided by this principle.
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    Beyond coding, I'm deeply involved in the developer community—contributing to open-source projects, mentoring aspiring developers, 
-                    and staying on the cutting edge of ML research. I believe knowledge shared is knowledge multiplied.
-                  </motion.p>
-                </div>
-
-                {/* Resume CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-xl border border-blue-200 dark:border-blue-800"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                        Want to know more about my journey?
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        Download my complete resume for detailed information about my experience and projects.
-                      </p>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleResumeDownload}
-                      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors min-h-[44px] w-full sm:w-auto justify-center"
-                    >
-                      <Download className="h-4 w-4" />
-                      <span>Download Resume</span>
-                    </motion.button>
-                  </div>
-                </motion.div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                className="relative"
-              >
-                <motion.div
-                  whileHover={{ rotateY: 5, scale: 1.02 }}
-                  className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 sm:p-8 text-white shadow-2xl"
-                >
-                  <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-                    Currently Exploring
-                  </h3>
-                  <ul className="space-y-3 sm:space-y-4">
-                    {[
-                      'Advanced RAG Systems with LangChain',
-                      'Multi-Agent AI Architectures',
-                      'Edge AI and Model Optimization',
-                      'Computer Vision in Agriculture'
-                    ].map((item, index) => (
-                      <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-center group cursor-pointer"
-                        whileHover={{ x: 10 }}
-                      >
-                        <motion.div 
-                          className="w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full mr-3 sm:mr-4 flex-shrink-0"
-                          whileHover={{ scale: 1.5, rotate: 360 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <span className="font-medium group-hover:text-yellow-200 transition-colors text-sm sm:text-base">
-                          {item}
-                        </span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-                
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl transform translate-x-2 translate-y-2 opacity-20"
-                  animate={{ 
-                    translateX: [8, 12, 8],
-                    translateY: [8, 12, 8]
+        {/* Enhanced Call to Action */}
+        <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-white"
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+                Ready to Build Something Amazing?
+              </h2>
+              <p className="text-xl mb-8 opacity-90">
+                Let's collaborate on your next innovative project
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setShowConfetti(true);
+                    setTimeout(() => setShowConfetti(false), 2000);
+                    window.open('mailto:arkaofficial13@gmail.com');
                   }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                />
-              </motion.div>
-            </div>
+                  className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <Mail className="h-5 w-5" />
+                  Get In Touch
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleResumeDownload}
+                  className="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <Download className="h-5 w-5" />
+                  Download Resume
+                </motion.button>
+              </div>
+            </motion.div>
           </div>
         </section>
       </div>
@@ -1194,13 +942,6 @@ const About = () => {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <Download className="h-5 w-5 sm:h-6 sm:w-6" />
-          </motion.div>
-          <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            whileHover={{ width: 'auto', opacity: 1 }}
-            className="hidden sm:block absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-1 rounded-lg whitespace-nowrap overflow-hidden"
-          >
-            Download Resume
           </motion.div>
         </motion.button>
       </motion.div>
