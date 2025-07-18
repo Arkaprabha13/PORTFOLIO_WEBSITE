@@ -11,7 +11,7 @@ import {
   Navbar, NavBody, NavItems, MobileNav, NavbarLogo, NavbarButton,
   MobileNavHeader, MobileNavToggle, MobileNavMenu,
 } from '@/components/ui/resizable-navbar';
-import './Timeline.css';
+import '../components/Timeline.css'; // ← Correct import path
 const About = () => {
   // State Management
   const [darkMode, setDarkMode] = useState(false);
