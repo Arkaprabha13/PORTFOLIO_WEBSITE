@@ -689,224 +689,231 @@ const About = () => {
           </div>
         </section>
 
-        {/* Enhanced Mobile-Responsive Timeline Section */}
-        <section className="py-12 sm:py-20 bg-white dark:bg-gray-800 relative" ref={timelineRef}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       {/* Enhanced Mobile-Responsive Timeline Section - FIXED VERSION */}
+<section className="py-12 sm:py-20 bg-white dark:bg-gray-800 relative" ref={timelineRef}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center mb-8 sm:mb-16"
+    >
+      <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-8 text-gray-900 dark:text-white">
+        My Journey
+      </h2>
+      <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8">
+        From curious beginner to Full-Stack ML Engineer - here's how my passion for technology evolved
+      </p>
+      
+      {/* Enhanced Control Panel */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors min-h-[44px] text-sm sm:text-base"
+        >
+          {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          {isPlaying ? 'Pause Auto-Play' : 'Auto-Play Journey'}
+        </motion.button>
+        
+        <div className="hidden sm:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <span>{activeTimeline + 1}</span>
+          <span>/</span>
+          <span>{timelineData.length}</span>
+        </div>
+      </div>
+    </motion.div>
+    
+    {/* FIXED Timeline Container */}
+    <div className="relative">
+      {/* Central Timeline Line - PROPERLY POSITIONED */}
+      <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-0.5 w-0.5 h-full bg-gradient-to-b from-blue-600 to-purple-600 z-10"></div>
+      
+      {/* Timeline Items - FIXED ALTERNATING LAYOUT */}
+      <div className="space-y-12 md:space-y-16">
+        {timelineData.map((item, index) => {
+          const isEven = index % 2 === 0;
+          
+          return (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-8 sm:mb-16"
+              key={index}
+              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`relative flex items-center ${
+                // Mobile: all items align left with proper spacing
+                // Desktop: alternating left-right layout
+                'md:' + (isEven ? 'justify-start' : 'justify-end')
+              }`}
+              onMouseEnter={() => setActiveTimeline(index)}
+              onTouchStart={() => setActiveTimeline(index)}
             >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-8 text-gray-900 dark:text-white">
-                My Journey
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8">
-                From curious beginner to Full-Stack ML Engineer - here's how my passion for technology evolved
-              </p>
+              {/* Timeline Icon - PERFECTLY CENTERED */}
+              <motion.div 
+                className="absolute left-6 md:left-1/2 md:transform md:-translate-x-1/2 w-12 h-12 rounded-full z-20 flex items-center justify-center shadow-lg"
+                whileHover={{ scale: 1.1 }}
+                animate={activeTimeline === index ? { 
+                  scale: 1.15, 
+                  boxShadow: "0 0 25px rgba(59, 130, 246, 0.6)" 
+                } : { scale: 1 }}
+                style={{
+                  background: `linear-gradient(135deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`
+                }}
+              >
+                <item.icon className="h-6 w-6 text-white" />
+              </motion.div>
               
-              {/* Enhanced Control Panel */}
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors min-h-[44px] text-sm sm:text-base"
+              {/* Content Container - PROPER POSITIONING */}
+              <div className={`
+                w-full ml-20 md:ml-0 md:w-5/12
+                ${isEven ? 'md:pr-16' : 'md:pl-16'}
+              `}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="relative"
                 >
-                  {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                  {isPlaying ? 'Pause Auto-Play' : 'Auto-Play Journey'}
-                </motion.button>
-                
-                {/* Mobile-friendly progress indicator */}
-                <div className="hidden sm:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span>{activeTimeline + 1}</span>
-                  <span>/</span>
-                  <span>{timelineData.length}</span>
-                </div>
+                  {/* Connection Line to Icon - DESKTOP ONLY */}
+                  <div className={`hidden md:block absolute top-6 w-8 h-0.5 bg-gray-300 dark:bg-gray-600 ${
+                    isEven ? 'right-0' : 'left-0'
+                  }`}></div>
+                  
+                  <Card className={`timeline-card transition-all duration-300 ${
+                    activeTimeline === index ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-lg'
+                  } bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600`}>
+                    <CardHeader className="pb-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <div className="flex items-center space-x-3">
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                            {item.year}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                          <Calendar className="h-3 w-3" />
+                          <span>{item.duration}</span>
+                        </div>
+                      </div>
+                      <CardTitle className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mt-2">
+                        {item.title}
+                      </CardTitle>
+                    </CardHeader>
+                    
+                    <CardContent className="pt-0">
+                      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                        {item.description}
+                      </p>
+                      
+                      {/* Achievements Section */}
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={activeTimeline === index ? { 
+                          height: 'auto', 
+                          opacity: 1 
+                        } : { 
+                          height: 0, 
+                          opacity: 0 
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
+                          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                            <Award className="h-4 w-4 text-yellow-500" />
+                            Key Achievements
+                          </h4>
+                          <div className="space-y-2">
+                            {item.achievements.map((achievement, idx) => (
+                              <motion.div
+                                key={idx}
+                                initial={{ x: -10, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="flex items-start gap-2 text-sm"
+                              >
+                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                  {achievement}
+                                </span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                      
+                      {/* Expand Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setActiveTimeline(activeTimeline === index ? -1 : index)}
+                        className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors min-h-[44px]"
+                      >
+                        <span className="sm:hidden">
+                          {activeTimeline === index ? 'Show Less' : 'Show More'}
+                        </span>
+                        <span className="hidden sm:inline">
+                          {activeTimeline === index ? 'Collapse' : 'Expand Details'}
+                        </span>
+                        <ChevronDown className={`h-4 w-4 transform transition-transform ${
+                          activeTimeline === index ? 'rotate-180' : ''
+                        }`} />
+                      </motion.button>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </div>
             </motion.div>
-            
-            {/* Enhanced Mobile-First Timeline */}
-            <div className="relative">
-              {/* Central Timeline Line - Responsive */}
-              <div className="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-0.5 sm:w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></div>
-              
-              {/* Timeline Items */}
-              <div className="space-y-8 sm:space-y-16">
-                {timelineData.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`relative flex items-start ${
-                      // Mobile: all items align left, Desktop: alternate left/right
-                      'sm:' + (index % 2 === 0 ? 'flex-row-reverse' : 'flex-row')
-                    }`}
-                    onMouseEnter={() => setActiveTimeline(index)}
-                    onTouchStart={() => setActiveTimeline(index)}
-                  >
-                    {/* Timeline Icon - Enhanced for Mobile */}
-                    <motion.div 
-                      className="absolute left-0 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full z-10 flex items-center justify-center"
-                      whileHover={{ scale: 1.2 }}
-                      animate={activeTimeline === index ? { 
-                        scale: 1.1, 
-                        boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)" 
-                      } : { scale: 1 }}
-                      style={{
-                        background: `linear-gradient(135deg, ${item.color.split(' ')[1]}, ${item.color.split(' ')[3]})`
-                      }}
-                    >
-                      <item.icon className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
-                    </motion.div>
-                    
-                    {/* Content Container - Mobile Optimized */}
-                    <div className={`w-full ml-12 sm:ml-0 ${
-                      // Mobile: full width, Desktop: half width with proper spacing
-                      'sm:w-1/2 ' + (index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8')
-                    }`}>
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="perspective-1000"
-                      >
-                        <Card className={`timeline-card transition-all duration-300 ${
-                          activeTimeline === index ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-lg'
-                        } bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600`}>
-                          <CardHeader className="pb-3">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                              <div className="flex items-center space-x-3">
-                                <div className="flex-shrink-0">
-                                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                                    {item.year}
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                                <Calendar className="h-3 w-3" />
-                                <span>{item.duration}</span>
-                              </div>
-                            </div>
-                            <CardTitle className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mt-2">
-                              {item.title}
-                            </CardTitle>
-                          </CardHeader>
-                          
-                          <CardContent className="pt-0">
-                            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                              {item.description}
-                            </p>
-                            
-                            {/* Enhanced Achievements Section */}
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={activeTimeline === index ? { 
-                                height: 'auto', 
-                                opacity: 1 
-                              } : { 
-                                height: 0, 
-                                opacity: 0 
-                              }}
-                              transition={{ duration: 0.3 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
-                                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                                  <Award className="h-4 w-4 text-yellow-500" />
-                                  Key Achievements
-                                </h4>
-                                <div className="space-y-2">
-                                  {item.achievements.map((achievement, idx) => (
-                                    <motion.div
-                                      key={idx}
-                                      initial={{ x: -10, opacity: 0 }}
-                                      animate={{ x: 0, opacity: 1 }}
-                                      transition={{ delay: idx * 0.1 }}
-                                      className="flex items-start gap-2 text-sm"
-                                    >
-                                      <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                      <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        {achievement}
-                                      </span>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </div>
-                            </motion.div>
-                            
-                            {/* Mobile-Friendly Expand Button */}
-                            <motion.button
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setActiveTimeline(activeTimeline === index ? null : index)}
-                              className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors min-h-[44px]"
-                            >
-                              <span className="sm:hidden">
-                                {activeTimeline === index ? 'Show Less' : 'Show More'}
-                              </span>
-                              <span className="hidden sm:inline">
-                                {activeTimeline === index ? 'Collapse' : 'Expand Details'}
-                              </span>
-                              <ChevronDown className={`h-4 w-4 transform transition-transform ${
-                                activeTimeline === index ? 'rotate-180' : ''
-                              }`} />
-                            </motion.button>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Mobile Progress Indicator */}
-              <div className="sm:hidden mt-8 flex justify-center">
-                <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {activeTimeline + 1} of {timelineData.length}
-                  </span>
-                  <div className="flex gap-1">
-                    {timelineData.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-2 h-2 rounded-full transition-colors ${
-                          index === activeTimeline ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Enhanced Mobile Navigation */}
-            <div className="mt-8 sm:mt-12 flex justify-center">
-              <div className="flex gap-2 sm:gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))}
-                  disabled={activeTimeline === 0}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  <span className="hidden sm:inline">Previous</span>
-                </motion.button>
-                
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveTimeline(Math.min(timelineData.length - 1, activeTimeline + 1))}
-                  disabled={activeTimeline === timelineData.length - 1}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
-                >
-                  <span className="hidden sm:inline">Next</span>
-                  <ChevronRight className="h-4 w-4" />
-                </motion.button>
-              </div>
-            </div>
+          );
+        })}
+      </div>
+      
+      {/* Mobile Progress Indicator */}
+      <div className="md:hidden mt-8 flex justify-center">
+        <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full">
+          <span className="text-sm text-gray-600 dark:text-gray-400">
+            {activeTimeline + 1} of {timelineData.length}
+          </span>
+          <div className="flex gap-1">
+            {timelineData.map((_, index) => (
+              <div
+                key={index}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  index === activeTimeline ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                }`}
+              />
+            ))}
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+    
+    {/* Navigation Controls */}
+    <div className="mt-8 sm:mt-12 flex justify-center">
+      <div className="flex gap-2 sm:gap-4">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setActiveTimeline(Math.max(0, activeTimeline - 1))}
+          disabled={activeTimeline === 0}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          <span className="hidden sm:inline">Previous</span>
+        </motion.button>
+        
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setActiveTimeline(Math.min(timelineData.length - 1, activeTimeline + 1))}
+          disabled={activeTimeline === timelineData.length - 1}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors min-h-[44px]"
+        >
+          <span className="hidden sm:inline">Next</span>
+          <ChevronRight className="h-4 w-4" />
+        </motion.button>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Enhanced Skills Section */}
         <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900" ref={skillsRef}>
