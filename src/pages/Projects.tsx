@@ -56,182 +56,355 @@ const Projects = () => {
   ];
 
   // Projects data (as provided)
-  const projects = [
-    {
-      id: 1,
-      name: 'Krishak 🌾',
-      category: 'AI',
-      techStack: ['LangChain', 'FAISS', 'Groq API', 'CNN', 'Python', 'Streamlit'],
-      brief: 'AI platform for crop advice and disease diagnosis with 99.35% accuracy. Features include real-time plant disease detection, personalized crop recommendations, and weather-based farming insights.',
-      fullDescription: 'Krishak revolutionizes agriculture through AI-powered solutions. The platform combines computer vision for disease detection, natural language processing for farmer queries, and vector databases for intelligent crop recommendations. Built with cutting-edge technologies, it serves over 1000+ farmers with real-time insights.',
-      githubUrl: 'https://github.com/arkaprabha/krishak',
-      liveUrl: 'https://krishak.streamlit.app',
-      heroImage: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1592982634038-a3e2d4c8c5e1?w=600&h=400&fit=crop'
-      ],
-      status: 'Live',
-      stars: 47,
-      forks: 12,
-      lastUpdated: '2024-12',
-      difficulty: 'Advanced',
-      duration: '6 months',
-      team: '3 developers',
-      features: [
-        'Real-time disease detection with 99.35% accuracy',
-        'Multi-language support for farmer queries',
-        'Weather-based farming recommendations',
-        'Crop yield prediction using ML models',
-        'SMS-based advisory system for rural farmers',
-        'Satellite imagery integration for field monitoring'
-      ],
-      technologies: {
-        frontend: ['Streamlit', 'HTML/CSS', 'JavaScript'],
-        backend: ['Python', 'FastAPI', 'LangChain'],
-        database: ['FAISS', 'Vector DB', 'PostgreSQL'],
-        ai: ['CNN', 'Computer Vision', 'NLP', 'Groq API']
-      },
-      metrics: {
-        users: '1000+',
-        accuracy: '99.35%',
-        uptime: '99.9%',
-        response: '<200ms'
-      }
+ const projects = [
+  {
+    id: 1,
+    name: 'Krishak 🌾',
+    category: 'AI',
+    techStack: ['LangChain', 'FAISS', 'Groq API', 'CNN', 'Python', 'Streamlit'],
+    brief: 'AI platform for crop advice and disease diagnosis with 99.35% accuracy. Features include real-time plant disease detection, personalized crop recommendations, and weather-based farming insights.',
+    fullDescription: 'Krishak revolutionizes agriculture through AI-powered solutions. The platform combines computer vision for disease detection, natural language processing for farmer queries, and vector databases for intelligent crop recommendations. Built with cutting-edge technologies, it serves over 1000+ farmers with real-time insights.',
+    githubUrl: 'https://github.com/Arkaprabha13/krishak',
+    liveUrl: 'https://krishak.streamlit.app',
+    heroImage: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1592982634038-a3e2d4c8c5e1?w=600&h=400&fit=crop'
+    ],
+    status: 'Live',
+    stars: 47,
+    forks: 12,
+    lastUpdated: '2024-12',
+    difficulty: 'Advanced',
+    duration: '6 months',
+    team: '3 developers',
+    features: [
+      'Real-time disease detection with 99.35% accuracy',
+      'Multi-language support for farmer queries',
+      'Weather-based farming recommendations',
+      'Crop yield prediction using ML models',
+      'SMS-based advisory system for rural farmers',
+      'Satellite imagery integration for field monitoring'
+    ],
+    technologies: {
+      frontend: ['Streamlit', 'HTML/CSS', 'JavaScript'],
+      backend: ['Python', 'FastAPI', 'LangChain'],
+      database: ['FAISS', 'Vector DB', 'PostgreSQL'],
+      ai: ['CNN', 'Computer Vision', 'NLP', 'Groq API']
     },
-    {
-      id: 2,
-      name: 'AutoML SaaS Platform',
-      category: 'ML',
-      techStack: ['Streamlit', 'scikit-learn', 'Plotly', 'Pandas', 'Docker'],
-      brief: 'No-code machine learning pipeline with automated EDA, model training, and exportable artifacts. Democratizing ML for non-technical users.',
-      fullDescription: 'A comprehensive AutoML platform that enables users to build, train, and deploy machine learning models without writing code. Features automated data preprocessing, model selection, hyperparameter tuning, and performance visualization with interactive dashboards.',
-      githubUrl: 'https://github.com/arkaprabha/automl-platform',
-      liveUrl: 'https://automl-demo.streamlit.app',
-      heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop'
-      ],
-      status: 'Demo',
-      stars: 34,
-      forks: 8,
-      lastUpdated: '2024-11',
-      difficulty: 'Intermediate',
-      duration: '4 months',
-      team: '2 developers',
-      features: [
-        'Automated data preprocessing and cleaning',
-        'Multiple ML algorithm comparison',
-        'Interactive visualization dashboard',
-        'Model export in multiple formats',
-        'Hyperparameter optimization',
-        'Real-time model performance monitoring'
-      ],
-      technologies: {
-        frontend: ['Streamlit', 'Plotly', 'HTML/CSS'],
-        backend: ['Python', 'scikit-learn', 'Pandas'],
-        database: ['SQLite', 'File Storage'],
-        deployment: ['Docker', 'Streamlit Cloud']
-      },
-      metrics: {
-        models: '15+',
-        accuracy: '95%+',
-        processing: '10x faster',
-        users: '500+'
-      }
-    },
-    {
-      id: 3,
-      name: 'RAG Multi-Agent Assistant',
-      category: 'AI',
-      techStack: ['LangChain', 'FAISS', 'Llama 3', 'Supabase', 'FastAPI'],
-      brief: 'Retrieval-Augmented Generation system with multi-agent routing and context persistence. Intelligent document Q&A with conversation memory.',
-      fullDescription: 'Advanced RAG system that combines multiple AI agents for intelligent document processing and question answering. Features include context-aware responses, conversation memory, multi-document support, and real-time collaboration capabilities.',
-      githubUrl: 'https://github.com/arkaprabha/rag-assistant',
-      liveUrl: null,
-      heroImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop'
-      ],
-      status: 'GitHub',
-      stars: 28,
-      forks: 6,
-      lastUpdated: '2024-12',
-      difficulty: 'Expert',
-      duration: '5 months',
-      team: '1 developer',
-      features: [
-        'Multi-agent conversation routing',
-        'Context-aware document retrieval',
-        'Conversation memory persistence',
-        'Support for multiple document formats',
-        'Real-time collaboration features',
-        'Advanced semantic search capabilities'
-      ],
-      technologies: {
-        frontend: ['React', 'TypeScript', 'Tailwind CSS'],
-        backend: ['FastAPI', 'LangChain', 'Python'],
-        database: ['Supabase', 'FAISS', 'Vector DB'],
-        ai: ['Llama 3', 'RAG', 'Multi-Agent Systems']
-      },
-      metrics: {
-        accuracy: '92%',
-        response: '<500ms',
-        documents: '10K+',
-        queries: '50K+'
-      }
-    },
-    {
-      id: 4,
-      name: 'YOLOv5 Detection Pipeline',
-      category: 'CV',
-      techStack: ['Python', 'OpenCV', 'PyTorch', 'MLOps', 'Docker', 'FastAPI'],
-      brief: 'End-to-end object detection pipeline with real-time inference and custom training modules. Production-ready deployment with MLOps best practices.',
-      fullDescription: 'Complete computer vision pipeline built on YOLOv5 with custom training capabilities, real-time inference, and production deployment. Includes data augmentation, model optimization, performance monitoring, and automated CI/CD pipelines.',
-      githubUrl: 'https://github.com/arkaprabha/yolo-pipeline',
-      liveUrl: 'https://yolo-demo.herokuapp.com',
-      heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-      galleryImages: [
-        'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop',
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop'
-      ],
-      status: 'Live',
-      stars: 52,
-      forks: 15,
-      lastUpdated: '2024-10',
-      difficulty: 'Advanced',
-      duration: '4 months',
-      team: '2 developers',
-      features: [
-        'Custom dataset training pipeline',
-        'Real-time object detection API',
-        'Model performance monitoring',
-        'Containerized deployment with Docker',
-        'Automated model versioning',
-        'Edge device optimization'
-      ],
-      technologies: {
-        frontend: ['React', 'WebRTC', 'Canvas API'],
-        backend: ['FastAPI', 'PyTorch', 'OpenCV'],
-        deployment: ['Docker', 'Kubernetes', 'AWS'],
-        monitoring: ['MLflow', 'Prometheus', 'Grafana']
-      },
-      metrics: {
-        fps: '30+',
-        accuracy: '95%',
-        latency: '<100ms',
-        objects: '80+ classes'
-      }
+    metrics: {
+      users: '1000+',
+      accuracy: '99.35%',
+      uptime: '99.9%',
+      response: '<200ms'
     }
-  ];
+  },
+  {
+    id: 2,
+    name: 'AutoML SaaS Platform',
+    category: 'ML',
+    techStack: ['Streamlit', 'scikit-learn', 'Plotly', 'Pandas', 'Docker'],
+    brief: 'No-code machine learning pipeline with automated EDA, model training, and exportable artifacts. Democratizing ML for non-technical users.',
+    fullDescription: 'A comprehensive AutoML platform that enables users to build, train, and deploy machine learning models without writing code. Features automated data preprocessing, model selection, hyperparameter tuning, and performance visualization with interactive dashboards.',
+    githubUrl: 'https://github.com/Arkaprabha13/automl-platform',
+    liveUrl: 'https://automl-demo.streamlit.app',
+    heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop'
+    ],
+    status: 'Demo',
+    stars: 34,
+    forks: 8,
+    lastUpdated: '2024-11',
+    difficulty: 'Intermediate',
+    duration: '4 months',
+    team: '2 developers',
+    features: [
+      'Automated data preprocessing and cleaning',
+      'Multiple ML algorithm comparison',
+      'Interactive visualization dashboard',
+      'Model export in multiple formats',
+      'Hyperparameter optimization',
+      'Real-time model performance monitoring'
+    ],
+    technologies: {
+      frontend: ['Streamlit', 'Plotly', 'HTML/CSS'],
+      backend: ['Python', 'scikit-learn', 'Pandas'],
+      database: ['SQLite', 'File Storage'],
+      deployment: ['Docker', 'Streamlit Cloud']
+    },
+    metrics: {
+      models: '15+',
+      accuracy: '95%+',
+      processing: '10x faster',
+      users: '500+'
+    }
+  },
+  {
+    id: 3,
+    name: 'RAG Multi-Agent Assistant',
+    category: 'AI',
+    techStack: ['LangChain', 'FAISS', 'Llama 3', 'Supabase', 'FastAPI'],
+    brief: 'Retrieval-Augmented Generation system with multi-agent routing and context persistence. Intelligent document Q&A with conversation memory.',
+    fullDescription: 'Advanced RAG system that combines multiple AI agents for intelligent document processing and question answering. Features include context-aware responses, conversation memory, multi-document support, and real-time collaboration capabilities.',
+    githubUrl: 'https://github.com/Arkaprabha13/rag-assistant',
+    liveUrl: null,
+    heroImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop'
+    ],
+    status: 'GitHub',
+    stars: 28,
+    forks: 6,
+    lastUpdated: '2024-12',
+    difficulty: 'Expert',
+    duration: '5 months',
+    team: '1 developer',
+    features: [
+      'Multi-agent conversation routing',
+      'Context-aware document retrieval',
+      'Conversation memory persistence',
+      'Support for multiple document formats',
+      'Real-time collaboration features',
+      'Advanced semantic search capabilities'
+    ],
+    technologies: {
+      frontend: ['React', 'TypeScript', 'Tailwind CSS'],
+      backend: ['FastAPI', 'LangChain', 'Python'],
+      database: ['Supabase', 'FAISS', 'Vector DB'],
+      ai: ['Llama 3', 'RAG', 'Multi-Agent Systems']
+    },
+    metrics: {
+      accuracy: '92%',
+      response: '<500ms',
+      documents: '10K+',
+      queries: '50K+'
+    }
+  },
+  {
+    id: 4,
+    name: 'YOLOv5 Detection Pipeline',
+    category: 'CV',
+    techStack: ['Python', 'OpenCV', 'PyTorch', 'MLOps', 'Docker', 'FastAPI'],
+    brief: 'End-to-end object detection pipeline with real-time inference and custom training modules. Production-ready deployment with MLOps best practices.',
+    fullDescription: 'Complete computer vision pipeline built on YOLOv5 with custom training capabilities, real-time inference, and production deployment. Includes data augmentation, model optimization, performance monitoring, and automated CI/CD pipelines.',
+    githubUrl: 'https://github.com/Arkaprabha13/yolo-pipeline',
+    liveUrl: 'https://yolo-demo.herokuapp.com',
+    heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop'
+    ],
+    status: 'Live',
+    stars: 52,
+    forks: 15,
+    lastUpdated: '2024-10',
+    difficulty: 'Advanced',
+    duration: '4 months',
+    team: '2 developers',
+    features: [
+      'Custom dataset training pipeline',
+      'Real-time object detection API',
+      'Model performance monitoring',
+      'Containerized deployment with Docker',
+      'Automated model versioning',
+      'Edge device optimization'
+    ],
+    technologies: {
+      frontend: ['React', 'WebRTC', 'Canvas API'],
+      backend: ['FastAPI', 'PyTorch', 'OpenCV'],
+      deployment: ['Docker', 'Kubernetes', 'AWS'],
+      monitoring: ['MLflow', 'Prometheus', 'Grafana']
+    },
+    metrics: {
+      fps: '30+',
+      accuracy: '95%',
+      latency: '<100ms',
+      objects: '80+ classes'
+    }
+  },
+  {
+    id: 5,
+    name: 'Banking System v1.0 🏦',
+    category: 'Web',
+    techStack: ['C++', 'CMake', 'Streamlit', 'Python', 'HTML', 'CSS', 'JavaScript'],
+    brief: 'A modern banking system with C++ backend API and dual frontend interfaces: Streamlit dashboard & modern web UI. Features user management, transaction processing, and real-time balance updates.',
+    fullDescription: 'Complete banking system with C++17 backend providing REST API endpoints for user management, account operations, and transaction processing. Dual frontend approach with Streamlit for admin dashboard and modern web interface for customers. Includes JWT authentication, role-based access control, and ACID-compliant CSV persistence.',
+    githubUrl: 'https://github.com/Arkaprabha13/banking_system',
+    liveUrl: null,
+    heroImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop'
+    ],
+    status: 'GitHub',
+    stars: 0,
+    forks: 0,
+    lastUpdated: '2025-05',
+    difficulty: 'Advanced',
+    duration: '3 months',
+    team: '1 developer',
+    features: [
+      'C++ backend with REST API endpoints',
+      'Dual frontend: Streamlit dashboard & web UI',
+      'JWT authentication with role-based access',
+      'Real-time transaction processing',
+      'ACID-compliant CSV file persistence',
+      'Multi-platform build system with CMake'
+    ],
+    technologies: {
+      frontend: ['Streamlit', 'HTML/CSS', 'JavaScript'],
+      backend: ['C++17', 'CMake', 'REST API'],
+      database: ['CSV Files', 'File Storage'],
+      deployment: ['Cross-platform', 'Docker Ready']
+    },
+    metrics: {
+      endpoints: '12+',
+      response: '<50ms',
+      platforms: '3+',
+      transactions: 'Real-time'
+    }
+  },
+  {
+    id: 6,
+    name: 'Smart Meeting Planner 📅',
+    category: 'Web',
+    techStack: ['Python', 'FastAPI', 'Streamlit', 'SQLite', 'SQLAlchemy', 'Plotly'],
+    brief: 'Comprehensive meeting planning and scheduling system with smart scheduling algorithms. Features AI-powered suggestions, calendar views, and real-time analytics dashboard.',
+    fullDescription: 'Advanced meeting scheduler with intelligent slot finding algorithms, participant availability tracking, and comprehensive calendar management. Built with FastAPI backend and Streamlit frontend, featuring bulk import capabilities, visual timelines, and smart recommendations for optimal meeting scheduling.',
+    githubUrl: 'https://github.com/Arkaprabha13/Smart_meeting_planar',
+    liveUrl: null,
+    heroImage: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop'
+    ],
+    status: 'GitHub',
+    stars: 0,
+    forks: 0,
+    lastUpdated: '2025-06',
+    difficulty: 'Intermediate',
+    duration: '2 months',
+    team: '1 developer',
+    features: [
+      'Smart scheduling with conflict detection',
+      'Interactive calendar with timeline views',
+      'Bulk import via JSON for busy slots',
+      'AI-powered meeting recommendations',
+      'Real-time analytics dashboard',
+      'Multi-user participant management'
+    ],
+    technologies: {
+      frontend: ['Streamlit', 'Plotly', 'HTML/CSS'],
+      backend: ['FastAPI', 'Python', 'SQLAlchemy'],
+      database: ['SQLite', 'File Storage'],
+      deployment: ['Uvicorn', 'Local Server']
+    },
+    metrics: {
+      algorithms: '5+',
+      response: '<200ms',
+      users: 'Multi-user',
+      accuracy: '95%+'
+    }
+  },
+  {
+    id: 7,
+    name: 'Sleek Legal Law Firm ⚖️',
+    category: 'Web',
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'PostCSS'],
+    brief: 'Modern web platform for legal services with responsive design and professional UI. Built with React 18, TypeScript, and Tailwind CSS for optimal performance and maintainability.',
+    fullDescription: 'Contemporary legal service platform emphasizing user experience and professional presentation. Features responsive design, consultation booking system, case study presentations, and team profiles. Built with modern web technologies and deployed on Vercel with optimized performance.',
+    githubUrl: 'https://github.com/Arkaprabha13/Sleek_legal_law_firm',
+    liveUrl: 'https://sleek-legal-law-firm.vercel.app',
+    heroImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&h=400&fit=crop'
+    ],
+    status: 'Live',
+    stars: 0,
+    forks: 0,
+    lastUpdated: '2025-04',
+    difficulty: 'Intermediate',
+    duration: '2 months',
+    team: '1 developer',
+    features: [
+      'Responsive design with Tailwind CSS',
+      'Professional legal service presentation',
+      'Consultation booking system',
+      'Interactive case study displays',
+      'Team profile management',
+      'SEO optimized with TypeScript'
+    ],
+    technologies: {
+      frontend: ['React 18', 'TypeScript', 'Tailwind CSS'],
+      backend: ['Node.js Ready', 'Express.js Setup'],
+      database: ['Future Integration'],
+      deployment: ['Vercel', 'Vite Build']
+    },
+    metrics: {
+      performance: '95+',
+      responsive: '100%',
+      typescript: '97.2%',
+      loading: '<2s'
+    }
+  },
+  {
+    id: 8,
+    name: 'Sorting Visualizers 📊',
+    category: 'CV',
+    techStack: ['Python', 'C++', 'Tkinter', 'OpenCV', 'Matplotlib'],
+    brief: 'Interactive sorting algorithm visualization tool with C++ backend for performance and Python/Tkinter frontend for dynamic visual representations of sorting processes.',
+    fullDescription: 'Educational tool for visualizing sorting algorithms with dual implementation approach. C++ backend handles high-performance sorting computations while Python Tkinter frontend provides interactive visualization. Supports multiple sorting algorithms with real-time step-by-step animation.',
+    githubUrl: 'https://github.com/Arkaprabha13/sorting_visualizers',
+    liveUrl: null,
+    heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&h=400&fit=crop'
+    ],
+    status: 'GitHub',
+    stars: 1,
+    forks: 0,
+    lastUpdated: '2024-09',
+    difficulty: 'Intermediate',
+    duration: '1 month',
+    team: '1 developer',
+    features: [
+      'Multiple sorting algorithm implementations',
+      'Real-time step-by-step visualization',
+      'Interactive speed control',
+      'C++ backend for performance',
+      'Python Tkinter GUI interface',
+      'Educational algorithm comparison'
+    ],
+    technologies: {
+      frontend: ['Python', 'Tkinter', 'GUI'],
+      backend: ['C++', 'Algorithms', 'Performance'],
+      visualization: ['Matplotlib', 'Animation'],
+      deployment: ['Local Executable', 'Cross-platform']
+    },
+    metrics: {
+      algorithms: '8+',
+      performance: 'High',
+      visualization: 'Real-time',
+      platforms: '3+'
+    }
+  }
+];
 
-  const categories = ['All', 'AI', 'ML', 'CV'];
+const categories = ['All', 'AI', 'ML', 'CV', 'Web'];
+
 
   // Utility functions
   const getStatusColor = (status) => {
