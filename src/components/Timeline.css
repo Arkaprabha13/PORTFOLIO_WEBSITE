@@ -1,0 +1,20 @@
+/* Enhanced timeline responsiveness */
+.timeline-card {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Improved mobile spacing */
+@media (max-width: 768px) {
+  .timeline-card {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Better icon alignment */
+@media (min-width: 768px) {
+  .timeline-icon {
+    transform: translateX(-50%);
+  }
+}
