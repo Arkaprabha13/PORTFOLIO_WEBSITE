@@ -4,7 +4,7 @@ import {
   Calendar, MapPin, GraduationCap, Award, Code, Heart, Sun, Moon, 
   ChevronDown, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, 
   Download, FileText, Mail, Github, Linkedin, ExternalLink, Sparkles,
-  TrendingUp, Target, Users, Zap, BookOpen, Coffee, Gamepad2
+  TrendingUp, Target, Users, Zap, BookOpen, Coffee, Gamepad2 , Suitcase
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -152,7 +152,7 @@ const About = () => {
     year: '2025',
     title: 'Data Science Intern at Tata Consultancy Services (TCS)',
     description: 'Completed a 3-month enterprise internship focused on data analytics, ML workflows, and scalable data processing',
-    icon: Briefcase,
+    icon: Suitcase,
     color: 'from-gray-500 to-blue-700',
     duration: 'Aug–Oct 2025',
     achievements: [
@@ -964,6 +964,7 @@ const About = () => {
 };
 
 export default About;
+
 
 
 
