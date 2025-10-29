@@ -147,7 +147,21 @@ const About = () => {
         'Advanced AI/ML Expertise'
       ],
       tags: ['ML Engineering', 'LangChain', 'RAG Systems']
-    }
+    },
+    {
+    year: '2025',
+    title: 'Data Science Intern at Tata Consultancy Services (TCS)',
+    description: 'Completed a 3-month enterprise internship focused on data analytics, ML workflows, and scalable data processing',
+    icon: Briefcase,
+    color: 'from-gray-500 to-blue-700',
+    duration: 'Aug–Oct 2025',
+    achievements: [
+      'Worked with cloud-based analytics tooling',
+      'Built end-to-end ML pipelines',
+      'Gained exposure to enterprise-grade data systems'
+    ],
+    tags: ['Internship', 'Data Science', 'Enterprise Analytics', 'TCS']
+  }
   ];
 
   // Enhanced Skills Data
@@ -950,6 +964,7 @@ const About = () => {
 };
 
 export default About;
+
 
 
 
