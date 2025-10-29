@@ -50,119 +50,105 @@ const About = () => {
 
   // Enhanced Timeline Data
   const timelineData = [
-  {
-    year: '2022',
-    title: 'Started B.Tech at Heritage Institute of Technology',
-    description: 'Began my journey in Computer Science and Engineering with a focus on AI/ML fundamentals',
-    icon: GraduationCap,
-    color: 'from-blue-500 to-purple-600',
-    duration: '4 years',
-    achievements: [
-      'CGPA: 9.1/10',
-      'Programming Started with C',
-      'Data Science Specialization'
-    ],
-    tags: ['Education', 'Foundation', 'CS Engineering']
-  },
-  {
-    year: '2023',
-    title: 'First Time Coding in C++ and Python',
-    description: 'Learned C++ and Python, building foundational skills in programming and problem-solving',
-    icon: Code,
-    color: 'from-green-500 to-blue-600',
-    duration: '1 year',
-    achievements: [
-      'LeetCode: 100+ Problems Solved',
-      'GeeksforGeeks: 200+ Problems Solved',
-      'Built first projects'
-    ],
-    tags: ['Programming', 'C++', 'Python']
-  },
-  {
-    year: '2024',
-    title: 'First Hackathon at Diversion 2024',
-    description: 'Participated in my first hackathon, focusing on AI/ML solutions for real-world problems',
-    icon: Award,
-    color: 'from-yellow-500 to-orange-600',
-    duration: '2 days',
-    achievements: [
-      'Team collaboration experience',
-      'Real-world problem solving',
-      'Network with industry professionals'
-    ],
-    tags: ['Hackathon', 'AI/ML', 'Teamwork']
-  },
-  {
-    year: '2024',
-    title: 'Joined NooBuild DSA Team',
-    description: 'Contributing to open-source DSA projects and mentoring junior developers',
-    icon: Heart,
-    color: 'from-purple-500 to-pink-600',
-    duration: '6 months',
-    achievements: [
-      '500+ Problems Solved',
-      'Mentored 50+ Students',
-      'Open source contributions'
-    ],
-    tags: ['Open Source', 'DSA', 'Mentoring']
-  },
-  {
-    year: '2024',
-    title: 'Building Different Projects',
-    description: 'Contributing to various projects, enhancing my skills in full-stack development and AI',
-    icon: Code,
-    color: 'from-indigo-500 to-purple-600',
-    duration: '8 months',
-    achievements: [
-      '20+ learning projects',
-      '5+ Major Projects',
-      'Full-stack development skills'
-    ],
-    tags: ['Full-Stack', 'Projects', 'Development']
-  },
-  {
-    year: '2025',
-    title: 'Built Krishak AI Platform',
-    description: 'Agricultural AI platform with 99.35% disease detection accuracy using advanced CNN models',
-    icon: Sparkles,
-    color: 'from-green-500 to-teal-600',
-    duration: '3 months',
-    achievements: [
-      '99.35% Disease Detection Accuracy',
-      '1000+ Farmers Helped',
-      'Featured in Tech Communities'
-    ],
-    tags: ['AI', 'Agriculture', 'CNN']
-  },
-  {
-    year: '2025',
-    title: 'Data Science Intern at Tata Consultancy Services (TCS)',
-    description: 'Completed a 3-month enterprise internship focused on data analytics, ML workflows, and scalable data processing',
-    icon: Briefcase,
-    color: 'from-gray-500 to-blue-700',
-    duration: 'Aug–Oct 2025',
-    achievements: [
-      'Worked with cloud-based analytics tooling',
-      'Built end-to-end ML pipelines',
-      'Gained exposure to enterprise-grade data systems'
-    ],
-    tags: ['Internship', 'Data Science', 'Enterprise Analytics', 'TCS']
-  },
-  {
-    year: '2025',
-    title: 'Full-Stack ML Engineer',
-    description: 'Specializing in LangChain, FAISS, RAG systems, and intelligent automation',
-    icon: TrendingUp,
-    color: 'from-orange-500 to-red-600',
-    duration: 'Present',
-    achievements: [
-      '8+ Major Projects Completed',
-      'Industry Recognition',
-      'Advanced AI/ML Expertise'
-    ],
-    tags: ['ML Engineering', 'LangChain', 'RAG Systems']
-  }
-];
+    {
+      year: '2022',
+      title: 'Started B.Tech at Heritage Institute of Technology',
+      description: 'Began my journey in Computer Science and Engineering with a focus on AI/ML fundamentals',
+      icon: GraduationCap,
+      color: 'from-blue-500 to-purple-600',
+      duration: '4 years',
+      achievements: [
+        'CGPA: 9.1/10',
+        'Programming Started with C',
+        'Data Science Specialization'
+      ],
+      tags: ['Education', 'Foundation', 'CS Engineering']
+    },
+    {
+      year: '2023',
+      title: 'First Time Coding in C++ and Python',
+      description: 'Learned C++ and Python, building foundational skills in programming and problem-solving',
+      icon: Code,
+      color: 'from-green-500 to-blue-600',
+      duration: '1 year',
+      achievements: [
+        'LeetCode: 100+ Problems Solved',
+        'GeeksforGeeks: 200+ Problems Solved',
+        'Built first projects'
+      ],
+      tags: ['Programming', 'C++', 'Python']
+    },
+    {
+      year: '2024',
+      title: 'First Hackathon at Diversion 2024',
+      description: 'Participated in my first hackathon, focusing on AI/ML solutions for real-world problems',
+      icon: Award,
+      color: 'from-yellow-500 to-orange-600',
+      duration: '2 days',
+      achievements: [
+        'Team collaboration experience',
+        'Real-world problem solving',
+        'Network with industry professionals'
+      ],
+      tags: ['Hackathon', 'AI/ML', 'Teamwork']
+    },
+    {
+      year: '2024',
+      title: 'Joined NooBuild DSA Team',
+      description: 'Contributing to open-source DSA projects and mentoring junior developers',
+      icon: Heart,
+      color: 'from-purple-500 to-pink-600',
+      duration: '6 months',
+      achievements: [
+        '500+ Problems Solved',
+        'Mentored 50+ Students',
+        'Open source contributions'
+      ],
+      tags: ['Open Source', 'DSA', 'Mentoring']
+    },
+    {
+      year: '2024',
+      title: 'Building Different Projects',
+      description: 'Contributing to various projects, enhancing my skills in full-stack development and AI',
+      icon: Code,
+      color: 'from-indigo-500 to-purple-600',
+      duration: '8 months',
+      achievements: [
+        '20+ learning projects',
+        '5+ Major Projects',
+        'Full-stack development skills'
+      ],
+      tags: ['Full-Stack', 'Projects', 'Development']
+    },
+    {
+      year: '2025',
+      title: 'Built Krishak AI Platform',
+      description: 'Agricultural AI platform with 99.35% disease detection accuracy using advanced CNN models',
+      icon: Sparkles,
+      color: 'from-green-500 to-teal-600',
+      duration: '3 months',
+      achievements: [
+        '99.35% Disease Detection Accuracy',
+        '1000+ Farmers Helped',
+        'Featured in Tech Communities'
+      ],
+      tags: ['AI', 'Agriculture', 'CNN']
+    },
+    {
+      year: '2025',
+      title: 'Full-Stack ML Engineer',
+      description: 'Specializing in LangChain, FAISS, RAG systems, and intelligent automation',
+      icon: TrendingUp,
+      color: 'from-orange-500 to-red-600',
+      duration: 'Present',
+      achievements: [
+        '8+ Major Projects Completed',
+        'Industry Recognition',
+        'Advanced AI/ML Expertise'
+      ],
+      tags: ['ML Engineering', 'LangChain', 'RAG Systems']
+    }
+  ];
 
   // Enhanced Skills Data
   const skills = [
@@ -964,5 +950,6 @@ const About = () => {
 };
 
 export default About;
+
 
 
